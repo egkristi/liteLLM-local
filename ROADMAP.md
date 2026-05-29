@@ -19,14 +19,11 @@
 - [x] Add a VS Code `settings.json` snippet file for easy Copilot Chat setup
 - [x] Add Docker Compose setup as an alternative to `uv`
 - [x] Add automatic model fallback (e.g., DeepSeek → Claude if rate-limited)
-- [ ] Add Prometheus/Grafana metrics export for usage monitoring
+- [x] Add Prometheus/Grafana metrics export for usage monitoring
 - [ ] Add a web UI for viewing logs, usage, and managing models
 
 ## Later
 
-- [ ] Add Docker Compose setup as an alternative to `uv`
-- [ ] Add Prometheus/Grafana metrics export for usage monitoring
-- [ ] Add automatic model fallback (e.g., DeepSeek → Claude if rate-limited)
 - [ ] Add a web UI for viewing logs, usage, and managing models
 
 ## Done

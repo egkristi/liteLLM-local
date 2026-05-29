@@ -26,4 +26,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed ISSUE-8: clarified Docker `PORT` behavior (host-only mapping)
 - Fixed ISSUE-9: `Makefile` `logs` target now tails only the most recent log file
 - Fixed ISSUE-10: `.vscode/settings.json` includes commented snippets for all configured models
+- Added Prometheus/Grafana monitoring stack (`docker-compose.monitoring.yml`, `monitoring/`)
+  - Prometheus scrapes LiteLLM metrics at `/metrics`
+  - Grafana pre-loaded with LiteLLM Overview dashboard (request rate, spend, latency, model breakdown)
 

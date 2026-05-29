@@ -203,6 +203,12 @@ liteLLM-local/
 ├── Makefile             # common commands (make start, make status, ...)
 ├── litellm-local        # cross-platform Python wrapper
 ├── docker-compose.yml   # Docker alternative to uv
+├── docker-compose.monitoring.yml  # Prometheus + Grafana stack
+├── monitoring/
+│   ├── prometheus.yml
+│   └── grafana/
+│       ├── dashboards/
+│       └── datasources/
 ├── .vscode/
 │   └── settings.json    # VS Code Copilot Chat snippet
 ├── docs/
