@@ -8,8 +8,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- GitHub Actions CI workflow (`.github/workflows/ci.yml`) — lints shell scripts with shellcheck, validates YAML with yamllint, checks Python syntax, verifies config env var consistency
+- `.yamllint` config matching project 2-space YAML style
+- Unit tests for `litellm-local` wrapper (`tests/test_litellm_local.py`) — 18 tests covering arg parsing, command dispatch, PORT env var, and subprocess calls
+- Multi-config profile support — `LITELLM_CONFIG` env var and `--config` flag to select different config files (e.g., `config.prod.yaml`)
+- Production config profile (`config.prod.yaml`) with master key and rate limiting settings
+- Automatic config reload — `--watch` flag / `LITELLM_RELOAD=true` enables LiteLLM's built-in `--reload` for hot-reloading config changes
+- `litellm-local config` command — validates config file structure, checks for duplicate models, missing fields, and env var references
 - 14 new Ollama cloud models exposed through LiteLLM proxy (deepseek-v4-pro-cloud, deepseek-v4-flash-cloud, gemma4-31b-cloud, gemini-3-flash-cloud, glm-5.1-cloud, kimi-k2.5-cloud, kimi-k2.6-cloud, minimax-m2.7-cloud, ministral-3-3b-cloud, ministral-3-8b-cloud, ministral-3-14b-cloud, mistral-large-3-675b-cloud, qwen3.5-397b-cloud, qwen3-vl-235b-cloud, qwen3-vl-235b-instruct-cloud)
+- `nomic-embed-text` model for embeddings support
 - Updated `.vscode/settings.json` with VS Code Copilot Chat snippets for all new Ollama cloud models
+
+### Changed
+- `litellm-local` wrapper refactored: `build_parser()` and `HANDLERS` dict exposed as module-level for testability
+- `start.sh` now uses `$CONFIG` variable (from `LITELLM_CONFIG` env var) instead of hardcoded `config.yaml`
+- `Makefile` now supports `CONFIG` variable for profile selection
 
 ### Added
 - Initial project scaffold: `config.yaml`, `start.sh`, `.env.example`, `.gitignore`

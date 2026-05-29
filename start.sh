@@ -4,6 +4,17 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "$SCRIPT_DIR"
 
+# --- Config profile support ---
+# Set LITELLM_CONFIG to use a different config file, e.g.:
+#   LITELLM_CONFIG=config.prod.yaml ./start.sh
+CONFIG="${LITELLM_CONFIG:-config.yaml}"
+if [ ! -f "$CONFIG" ]; then
+  echo "Error: config file '$CONFIG' not found."
+  echo "Set LITELLM_CONFIG to a valid config file, or use the default config.yaml."
+  exit 1
+fi
+echo "Using config: $CONFIG"
+
 # --- Prerequisite checks (ISSUE-2) ---
 if ! command -v uv &>/dev/null; then
   echo "Error: 'uv' is not installed. Install it from https://docs.astral.sh/uv/"
@@ -37,4 +48,11 @@ fi
 
 mkdir -p logs
 
-exec uv tool run litellm --config config.yaml --port "$PORT" 2>&1 | tee "logs/litellm-$(date +%Y%m%d-%H%M%S).log"
+# --- Config reload / watch mode ---
+RELOAD_FLAG=""
+if [ "${LITELLM_RELOAD:-}" = "true" ]; then
+  RELOAD_FLAG="--reload"
+  echo "Config reload enabled (watches $CONFIG for changes)"
+fi
+
+exec uv tool run litellm --config "$CONFIG" --port "$PORT" $RELOAD_FLAG 2>&1 | tee "logs/litellm-$(date +%Y%m%d-%H%M%S).log"

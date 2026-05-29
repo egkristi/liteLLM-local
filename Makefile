@@ -1,6 +1,7 @@
 .PHONY: start stop status usage logs install help
 
 PORT ?= 4000
+CONFIG ?= config.yaml
 
 help: ## Show this help
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-10s\033[0m %s\n", $$1, $$2}'
@@ -12,8 +13,8 @@ install: ## Install uv and litellm (if missing)
 	@uv tool list 2>/dev/null | grep -q litellm || uv tool install 'litellm[proxy]'
 	@echo "Done."
 
-start: ## Start the LiteLLM proxy (PORT=4001 make start)
-	@PORT=$(PORT) ./start.sh
+start: ## Start the LiteLLM proxy (CONFIG=config.prod.yaml make start)
+	@LITELLM_CONFIG=$(CONFIG) PORT=$(PORT) ./start.sh
 
 stop: ## Stop the LiteLLM proxy
 	@PORT=$(PORT) ./stop.sh

@@ -19,6 +19,10 @@ def run(cmd: list[str], **kwargs) -> int:
 def cmd_start(args):
     env = os.environ.copy()
     env["PORT"] = args.port or PORT
+    if args.config:
+        env["LITELLM_CONFIG"] = args.config
+    if args.watch:
+        env["LITELLM_RELOAD"] = "true"
     return run([str(SCRIPT_DIR / "start.sh")], env=env)
 
 
@@ -45,30 +49,130 @@ def cmd_webui(args):
     return run([sys.executable, str(SCRIPT_DIR / "webui.py")], env=env)
 
 
-def main():
+def cmd_config(args):
+    """Validate the config file."""
+    import json
+    import re
+
+    config_path = Path(args.config or SCRIPT_DIR / "config.yaml")
+    if not config_path.exists():
+        print(f"❌ Config file not found: {config_path}")
+        return 1
+
+    errors = []
+    warnings = []
+    content = config_path.read_text()
+
+    # Check basic YAML structure
+    stripped = content.strip()
+    if not stripped:
+        errors.append("Config file is empty")
+    elif not re.search(r'^model_list:', stripped, re.MULTILINE):
+        errors.append("Config must contain a 'model_list:' section")
+
+    # Check model entries (top-level only, not inside fallback blocks)
+    model_names = re.findall(r'^  - model_name:\s+(\S+)', content, re.MULTILINE)
+    if not model_names:
+        errors.append("No model entries found (expected 'model_name:' entries)")
+    else:
+        # Check for duplicate model names
+        seen = {}
+        for name in model_names:
+            if name in seen:
+                errors.append(f"Duplicate model_name: '{name}'")
+            seen[name] = True
+
+        # Check each model has required fields
+        model_blocks = re.split(r'\n  - model_name:', content)
+        for block in model_blocks[1:]:
+            # Stop if we hit a non-top-level section (indented further)
+            if block.startswith('  '):
+                continue
+            name_match = re.search(r'^\s+(\S+)', block)
+            name = name_match.group(1) if name_match else "unknown"
+            if "litellm_params:" not in block:
+                errors.append(f"Model '{name}' is missing 'litellm_params:'")
+            if "model:" not in block:
+                errors.append(f"Model '{name}' is missing 'model:' under litellm_params")
+
+    # Check env var references
+    env_refs = re.findall(r'os\.environ/(\w+)', content)
+    env_file = SCRIPT_DIR / ".env"
+    if env_file.exists():
+        env_content = env_file.read_text()
+        for ref in env_refs:
+            if f"{ref}=" not in env_content:
+                warnings.append(f"Environment variable '{ref}' referenced but not found in .env")
+    else:
+        warnings.append(".env file not found (env var references cannot be validated)")
+
+    # Check litellm_settings
+    if "litellm_settings:" not in content:
+        warnings.append("No 'litellm_settings:' section found (recommended)")
+
+    # Report results
+    if not errors and not warnings:
+        print(f"✅ Config is valid: {config_path}")
+        print(f"   Models defined: {len(model_names)}")
+        for name in model_names:
+            print(f"     - {name}")
+        return 0
+
+    if errors:
+        print(f"❌ Config has errors: {config_path}")
+        for err in errors:
+            print(f"   ERROR: {err}")
+    else:
+        print(f"✅ Config is valid: {config_path}")
+
+    if warnings:
+        print(f"   Models defined: {len(model_names)}")
+        for w in warnings:
+            print(f"   WARNING: {w}")
+
+    return 1 if errors else 0
+
+
+def build_parser() -> argparse.ArgumentParser:
+    """Build the argument parser (exposed for testing)."""
     parser = argparse.ArgumentParser(
         prog="litellm-local",
         description="Manage the LiteLLM local proxy",
     )
     parser.add_argument("--port", default=None, help="Proxy port (default: 4000)")
+    parser.add_argument("--config", default=None, help="Config file (default: config.yaml)")
+    parser.add_argument("--watch", action="store_true", help="Auto-reload on config changes")
     sub = parser.add_subparsers(dest="command", required=True)
 
     sub.add_parser("start", help="Start the proxy")
     sub.add_parser("stop", help="Stop the proxy")
     sub.add_parser("status", help="Check proxy health")
     sub.add_parser("usage", help="Show recent usage from logs")
+    config_parser = sub.add_parser("config", help="Validate config file")
+    config_parser.add_argument("--config", dest="config_arg", default=None,
+                               help="Config file to validate (default: config.yaml)")
     webui_parser = sub.add_parser("webui", help="Start the web dashboard")
     webui_parser.add_argument("--port", default=None, help="Dashboard port (default: 8080)")
+    return parser
 
+
+HANDLERS = {
+    "start": cmd_start,
+    "stop": cmd_stop,
+    "status": cmd_status,
+    "usage": cmd_usage,
+    "webui": cmd_webui,
+    "config": cmd_config,
+}
+
+
+def main():
+    parser = build_parser()
     args = parser.parse_args()
-    handlers = {
-        "start": cmd_start,
-        "stop": cmd_stop,
-        "status": cmd_status,
-        "usage": cmd_usage,
-        "webui": cmd_webui,
-    }
-    sys.exit(handlers[args.command](args))
+    # Map config subcommand's --config to the shared attribute
+    if args.command == "config" and hasattr(args, "config_arg") and args.config_arg:
+        args.config = args.config_arg
+    sys.exit(HANDLERS[args.command](args))
 
 
 if __name__ == "__main__":

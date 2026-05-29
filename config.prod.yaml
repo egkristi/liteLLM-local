@@ -1,0 +1,82 @@
+# Production config profile for LiteLLM proxy.
+# Uses more conservative settings suitable for production deployment.
+# Usage: LITELLM_CONFIG=config.prod.yaml ./start.sh
+
+model_list:
+  # DeepSeek — best for coding
+  - model_name: deepseek-v4-pro
+    litellm_params:
+      model: deepseek/deepseek-chat
+      api_key: os.environ/DEEPSEEK_API_KEY
+
+  # Anthropic Claude
+  - model_name: claude-sonnet
+    litellm_params:
+      model: anthropic/claude-sonnet-4-6
+      api_key: os.environ/ANTHROPIC_API_KEY
+
+  - model_name: claude-opus
+    litellm_params:
+      model: anthropic/claude-opus-4-6
+      api_key: os.environ/ANTHROPIC_API_KEY
+
+  # Groq — fast inference
+  - model_name: groq-llama
+    litellm_params:
+      model: groq/llama-3.3-70b-versatile
+      api_key: os.environ/GROQ_API_KEY
+
+  # Mistral — strong European models
+  - model_name: mistral-large
+    litellm_params:
+      model: mistral/mistral-large-latest
+      api_key: os.environ/MISTRAL_API_KEY
+
+  - model_name: codestral
+    litellm_params:
+      model: mistral/codestral-latest
+      api_key: os.environ/MISTRAL_API_KEY
+
+  # Moonshot / Kimi
+  - model_name: kimi-latest
+    litellm_params:
+      model: moonshot/moonshot-v1-128k
+      api_key: os.environ/KIMI_API_KEY
+
+  # Ollama — local models
+  - model_name: deepseek-local
+    litellm_params:
+      model: ollama/deepseek-v4-pro:cloud
+      api_base: http://localhost:11434
+
+  - model_name: qwen2.5-coder
+    litellm_params:
+      model: ollama/qwen2.5-coder
+      api_base: http://localhost:11434
+
+  # Automatic fallback
+  - model_name: fallback-deepseek
+    litellm_params:
+      model: deepseek/deepseek-chat
+      api_key: os.environ/DEEPSEEK_API_KEY
+    fallback:
+      - model_name: claude-sonnet
+        litellm_params:
+          model: anthropic/claude-sonnet-4-6
+          api_key: os.environ/ANTHROPIC_API_KEY
+      - model_name: groq-llama
+        litellm_params:
+          model: groq/llama-3.3-70b-versatile
+          api_key: os.environ/GROQ_API_KEY
+
+litellm_settings:
+  drop_params: true
+  set_verbose: false
+  spend_logs: true
+  log_file: logs/litellm.log
+
+general_settings:
+  # Production: require API key for all requests
+  master_key: os.environ/LITELLM_MASTER_KEY
+  # Rate limiting: 100 requests per minute per IP
+  proxy_batch_write_interval: 60

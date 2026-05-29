@@ -1,0 +1,67 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  lint-shell:
+    name: Lint shell scripts
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install shellcheck
+        run: sudo apt-get update && sudo apt-get install -y shellcheck
+      - name: Run shellcheck
+        run: shellcheck --shell=bash start.sh stop.sh status.sh test.sh usage.sh
+
+  lint-yaml:
+    name: Validate YAML
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install yamllint
+        run: pip install yamllint
+      - name: Run yamllint
+        run: yamllint config.yaml docker-compose.yml docker-compose.monitoring.yml
+
+  validate-python:
+    name: Validate Python syntax
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.9"
+      - name: Check Python syntax
+        run: |
+          python3 -m py_compile litellm-local
+          python3 -m py_compile webui.py
+
+  check-config:
+    name: Check config consistency
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify .env.example has all keys from config.yaml
+        run: |
+          # Extract os.environ/ keys from config.yaml
+          CONFIG_KEYS=$(grep -oP 'os\.environ/\K[A-Z_]+' config.yaml | sort -u)
+          echo "Config expects these env vars:"
+          echo "$CONFIG_KEYS"
+          # Check each key exists in .env.example
+          MISSING=0
+          for key in $CONFIG_KEYS; do
+            if ! grep -q "^${key}=" .env.example 2>/dev/null; then
+              echo "❌ Missing in .env.example: $key"
+              MISSING=1
+            fi
+          done
+          if [ "$MISSING" -eq 1 ]; then
+            echo "Add the missing keys to .env.example"
+            exit 1
+          fi
+          echo "✅ All config env vars present in .env.example"
