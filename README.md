@@ -147,7 +147,7 @@ launchctl load ~/Library/LaunchAgents/com.litellm.local.plist
 | Groq (direct) | llama-3.3-70b | ~$0.59 | ~$0.79 |
 | Mistral (direct) | mistral-large-latest | $2.00 | $6.00 |
 | Mistral (direct) | codestral-latest | $0.30 | $0.90 |
-| Ollama local | qwen2.5-coder:14b | free | free |
+| Ollama local | deepseek-v4-pro:cloud | free | free |
 | OpenRouter | (same models) | +10–15% markup | +10–15% markup |
 
 ---

@@ -39,4 +39,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed ISSUE-16: replaced Unicode em-dash in `.env` and `.env.example` comments with ASCII `--` to avoid shell parsing issues
 - Updated Ollama model from `qwen2.5-coder:14b` to `deepseek-v4-pro:cloud` (available locally)
 - Fixed `status.sh` Python f-string backslash syntax error (Python 3.9 compatibility)
+- Fixed `webui.py` Python 3.9 union type syntax (`dict | list | None` → `Union[dict, list, None]`)
+- Updated `AGENTS.md` with project overview, tech stack, file inventory, and testing notes
+- Cleaned up `ROADMAP.md` duplicate entries and reorganized sections
+- Updated `.vscode/settings.json` to reference `deepseek-local` instead of `qwen2.5-coder`
 
