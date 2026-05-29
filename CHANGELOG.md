@@ -20,4 +20,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added cross-platform Python wrapper `litellm-local`
 - Added `.vscode/settings.json` snippet for VS Code Copilot Chat setup
 - Added `docs/ADDING_MODELS.md` guide for extending model configuration
+- Added `docker-compose.yml` and `.dockerignore` for Docker-based deployment
+- Added automatic model fallback chain (`fallback-deepseek` → `claude-sonnet` → `groq-llama`)
 

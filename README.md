@@ -202,6 +202,7 @@ liteLLM-local/
 ├── usage.sh             # quick usage/cost from logs
 ├── Makefile             # common commands (make start, make status, ...)
 ├── litellm-local        # cross-platform Python wrapper
+├── docker-compose.yml   # Docker alternative to uv
 ├── .vscode/
 │   └── settings.json    # VS Code Copilot Chat snippet
 ├── docs/

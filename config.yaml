@@ -45,6 +45,22 @@ model_list:
       model: ollama/qwen2.5-coder:14b
       api_base: http://localhost:11434
 
+  # Automatic fallback: if a model fails (e.g., rate limit), try the next one
+  # Usage: set model="fallback-deepseek" in your client to use this chain
+  - model_name: fallback-deepseek
+    litellm_params:
+      model: deepseek/deepseek-chat
+      api_key: os.environ/DEEPSEEK_API_KEY
+    fallback:
+      - model_name: claude-sonnet
+        litellm_params:
+          model: anthropic/claude-sonnet-4-6
+          api_key: os.environ/ANTHROPIC_API_KEY
+      - model_name: groq-llama
+        litellm_params:
+          model: groq/llama-3.3-70b-versatile
+          api_key: os.environ/GROQ_API_KEY
+
 litellm_settings:
   drop_params: true        # strips unsupported params (fixes DeepSeek reasoning_content issue)
   set_verbose: false
