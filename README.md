@@ -192,10 +192,23 @@ launchctl load ~/Library/LaunchAgents/com.litellm.local.plist
 
 ```
 liteLLM-local/
-├── config.yaml       # model definitions
-├── .env              # API keys (gitignored)
+├── config.yaml          # model definitions
+├── .env                 # API keys (gitignored)
+├── .env.example         # template for .env
 ├── .gitignore
-├── start.sh          # convenience start script
+├── start.sh             # start the proxy (with checks)
+├── stop.sh              # stop the proxy
+├── status.sh            # health check & model list
+├── usage.sh             # quick usage/cost from logs
+├── Makefile             # common commands (make start, make status, ...)
+├── litellm-local        # cross-platform Python wrapper
+├── .vscode/
+│   └── settings.json    # VS Code Copilot Chat snippet
+├── docs/
+│   └── ADDING_MODELS.md # how to add custom models
+├── ISSUES.md            # known issues & fixes
+├── ROADMAP.md           # planned features
+├── CHANGELOG.md         # release history
 └── README.md
 ```
 

@@ -1,0 +1,65 @@
+#!/usr/bin/env python3
+"""Cross-platform wrapper to start, stop, and check the LiteLLM local proxy."""
+
+import argparse
+import os
+import subprocess
+import sys
+from pathlib import Path
+
+SCRIPT_DIR = Path(__file__).resolve().parent
+PORT = os.environ.get("PORT", "4000")
+
+
+def run(cmd: list[str], **kwargs) -> int:
+    """Run a subprocess and return its exit code."""
+    return subprocess.call(cmd, cwd=SCRIPT_DIR, **kwargs)
+
+
+def cmd_start(args):
+    env = os.environ.copy()
+    env["PORT"] = args.port or PORT
+    return run([str(SCRIPT_DIR / "start.sh")], env=env)
+
+
+def cmd_stop(args):
+    env = os.environ.copy()
+    env["PORT"] = args.port or PORT
+    return run([str(SCRIPT_DIR / "stop.sh")], env=env)
+
+
+def cmd_status(args):
+    env = os.environ.copy()
+    env["PORT"] = args.port or PORT
+    return run([str(SCRIPT_DIR / "status.sh")], env=env)
+
+
+def cmd_usage(_args):
+    return run([str(SCRIPT_DIR / "usage.sh")])
+
+
+def main():
+    parser = argparse.ArgumentParser(
+        prog="litellm-local",
+        description="Manage the LiteLLM local proxy",
+    )
+    parser.add_argument("--port", default=None, help="Proxy port (default: 4000)")
+    sub = parser.add_subparsers(dest="command", required=True)
+
+    sub.add_parser("start", help="Start the proxy")
+    sub.add_parser("stop", help="Stop the proxy")
+    sub.add_parser("status", help="Check proxy health")
+    sub.add_parser("usage", help="Show recent usage from logs")
+
+    args = parser.parse_args()
+    handlers = {
+        "start": cmd_start,
+        "stop": cmd_stop,
+        "status": cmd_status,
+        "usage": cmd_usage,
+    }
+    sys.exit(handlers[args.command](args))
+
+
+if __name__ == "__main__":
+    main()

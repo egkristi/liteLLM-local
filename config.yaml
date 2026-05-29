@@ -33,6 +33,12 @@ model_list:
       model: mistral/codestral-latest
       api_key: os.environ/MISTRAL_API_KEY
 
+  # Moonshot / Kimi
+  - model_name: kimi-latest
+    litellm_params:
+      model: moonshot/moonshot-v1-128k
+      api_key: os.environ/KIMI_API_KEY
+
   # Ollama — local, free
   - model_name: qwen2.5-coder
     litellm_params:
@@ -42,3 +48,5 @@ model_list:
 litellm_settings:
   drop_params: true        # strips unsupported params (fixes DeepSeek reasoning_content issue)
   set_verbose: false
+  spend_logs: true         # enable usage / cost tracking (ISSUE-6)
+  log_file: logs/litellm.log # persistent log file (ISSUE-5)
