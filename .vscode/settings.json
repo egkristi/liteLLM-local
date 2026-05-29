@@ -31,6 +31,48 @@
     // {"name": "LiteLLM Qwen3 Vl 235B Cloud", "vendor": "openai", "url": "http://localhost:4000/v1", "apiKey": "anything", "model": "qwen3-vl-235b-cloud"},
     // {"name": "LiteLLM Qwen3 Vl 235B Instruct Cloud", "vendor": "openai", "url": "http://localhost:4000/v1", "apiKey": "anything", "model": "qwen3-vl-235b-instruct-cloud"},
     // {"name": "LiteLLM Nomic Embed", "vendor": "openai", "url": "http://localhost:4000/v1", "apiKey": "anything", "model": "nomic-embed-text"},
-    // {"name": "LiteLLM Fallback Deepseek", "vendor": "openai", "url": "http://localhost:4000/v1", "apiKey": "anything", "model": "fallback-deepseek"}
+    // {"name": "LiteLLM Fallback Deepseek", "vendor": "openai", "url": "http://localhost:4000/v1", "apiKey": "anything", "model": "fallback-deepseek"},
+    {
+        "name": "\u2b50 Best Coding \u2192 deepseek-v4-pro",
+        "vendor": "openai",
+        "url": "http://localhost:4000/v1",
+        "apiKey": "anything",
+        "model": "best-coding"
+    },
+    {
+        "name": "\u2b50 Best Chat \u2192 claude-sonnet",
+        "vendor": "openai",
+        "url": "http://localhost:4000/v1",
+        "apiKey": "anything",
+        "model": "best-chat"
+    },
+    {
+        "name": "\u2b50 Fast \u2192 groq-llama",
+        "vendor": "openai",
+        "url": "http://localhost:4000/v1",
+        "apiKey": "anything",
+        "model": "fast"
+    },
+    {
+        "name": "\u2b50 Cheap \u2192 deepseek-v4-flash-cloud",
+        "vendor": "openai",
+        "url": "http://localhost:4000/v1",
+        "apiKey": "anything",
+        "model": "cheap"
+    },
+    {
+        "name": "\u2b50 Local \u2192 deepseek-local",
+        "vendor": "openai",
+        "url": "http://localhost:4000/v1",
+        "apiKey": "anything",
+        "model": "local"
+    },
+    {
+        "name": "\u2b50 Embedding \u2192 nomic-embed-text",
+        "vendor": "openai",
+        "url": "http://localhost:4000/v1",
+        "apiKey": "anything",
+        "model": "embedding"
+    }
   ]
 }
