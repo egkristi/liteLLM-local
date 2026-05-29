@@ -1,0 +1,118 @@
+# Shell completions for litellm-local
+#
+# Source this file in your shell config:
+#   Bash: echo "source $(pwd)/completions/litellm-local" >> ~/.bashrc
+#   Zsh:  echo "source $(pwd)/completions/litellm-local" >> ~/.zshrc
+
+_litellm_local_completions() {
+  local cur prev words cword
+  if type _get_comp_words_by_ref &>/dev/null 2>&1; then
+    _get_comp_words_by_ref -n : cur prev words cword
+  else
+    cur="${COMP_WORDS[COMP_CWORD]}"
+    prev="${COMP_WORDS[COMP_CWORD-1]}"
+  fi
+
+  # Top-level commands
+  local commands="start stop status usage config webui"
+  local opts="--port --config --watch --json --help"
+
+  # Check if we're completing a subcommand
+  local i
+  local command=""
+  for ((i=1; i < COMP_CWORD; i++)); do
+    local word="${COMP_WORDS[i]}"
+    case "$word" in
+      start|stop|status|usage|config|webui)
+        command="$word"
+        break
+        ;;
+    esac
+  done
+
+  if [[ -z "$command" ]]; then
+    # Completing the command name or global options
+    if [[ "$cur" == --* ]]; then
+      COMPREPLY=($(compgen -W "$opts" -- "$cur"))
+    else
+      COMPREPLY=($(compgen -W "$commands" -- "$cur"))
+    fi
+  else
+    # Completing arguments for a specific command
+    case "$command" in
+      config)
+        if [[ "$prev" == "--config" ]]; then
+          # Complete .yaml files
+          COMPREPLY=($(compgen -G "*.yaml" -- "$cur") $(compgen -G "*.yml" -- "$cur"))
+        else
+          COMPREPLY=($(compgen -W "--config" -- "$cur"))
+        fi
+        ;;
+      webui)
+        if [[ "$prev" == "--port" ]]; then
+          COMPREPLY=()
+        else
+          COMPREPLY=($(compgen -W "--port" -- "$cur"))
+        fi
+        ;;
+      start)
+        COMPREPLY=($(compgen -W "--port --config --watch --json" -- "$cur"))
+        ;;
+      stop|status|usage)
+        COMPREPLY=($(compgen -W "--port" -- "$cur"))
+        ;;
+    esac
+  fi
+}
+
+# Register completions for bash
+if [[ -n "$BASH_VERSION" ]]; then
+  complete -F _litellm_local_completions litellm-local
+fi
+
+# Register completions for zsh
+if [[ -n "$ZSH_VERSION" ]]; then
+  autoload -U +X compinit && compinit 2>/dev/null
+  _litellm_local_completions_zsh() {
+    local -a commands
+    commands=(
+      'start:Start the proxy'
+      'stop:Stop the proxy'
+      'status:Check proxy health'
+      'usage:Show recent usage from logs'
+      'config:Validate config file'
+      'webui:Start the web dashboard'
+    )
+    _arguments \
+      '--port[Proxy port]' \
+      '--config[Config file path]' \
+      '--watch[Auto-reload on config changes]' \
+      '--json[Enable JSON logging]' \
+      '--help[Show help]' \
+      ':command:->commands' \
+      '*::args:->args'
+
+    case "$state" in
+      commands)
+        _describe 'command' commands
+        ;;
+      args)
+        case "$line[1]" in
+          config)
+            _arguments '--config[Config file to validate]:config file:_files -g "*.yaml"'
+            ;;
+          webui)
+            _arguments '--port[Dashboard port]'
+            ;;
+          start)
+            _arguments '--port[Proxy port]' '--config[Config file]' '--watch[Auto-reload]' '--json[JSON logging]'
+            ;;
+          stop|status)
+            _arguments '--port[Proxy port]'
+            ;;
+        esac
+        ;;
+    esac
+  }
+  compdef _litellm_local_completions_zsh litellm-local
+fi

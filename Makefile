@@ -43,3 +43,24 @@ audit: ## Check .env against .env.example for missing/placeholder keys
 
 rotate-key: ## Rotate an API key (PROVIDER=deepseek make rotate-key)
 	@./rotate-key.sh $(PROVIDER)
+
+uptime: ## Check proxy uptime (UPTIME_DAEMON=true for continuous)
+	@./uptime-monitor.sh $(if $(UPTIME_DAEMON),--daemon,)
+
+uptime-install: ## Install uptime monitor as launchd agent
+	@./uptime-monitor.sh --install
+
+uptime-uninstall: ## Remove uptime monitor launchd agent
+	@./uptime-monitor.sh --uninstall
+
+cost-alert: ## Check spend and alert if over threshold (THRESHOLD=50)
+	@./cost-alert.sh $(if $(THRESHOLD),--threshold $(THRESHOLD),)
+
+cost-alert-install: ## Install daily cost alert as launchd agent
+	@./cost-alert.sh --install $(if $(THRESHOLD),--threshold $(THRESHOLD),)
+
+cost-alert-uninstall: ## Remove cost alert launchd agent
+	@./cost-alert.sh --uninstall
+
+export-spend: ## Export daily spend to CSV (DAYS=7 make export-spend)
+	@./export-spend.sh $(if $(DAYS),--days $(DAYS),) $(if $(BY_MODEL),--model,) $(if $(OUTPUT),--output $(OUTPUT),)

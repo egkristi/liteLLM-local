@@ -8,6 +8,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- `docs/PROVIDERS.md` — reference for all providers: where to get a key, LiteLLM model string, current pricing
+- `docs/TROUBLESHOOTING.md` — document known issues: DeepSeek `reasoning_content` fix, Ollama cloud vs local, VS Code 402 errors, rate limit handling
+- `docs/FAMILY_SETUP.md` — guide for adding a family member: virtual key with budget cap, VS Code setup, which models to use for what
+- Shell completions (`completions/litellm-local`) — bash and zsh tab-completion for `litellm-local` commands and flags
+- Uptime monitor (`uptime-monitor.sh`) — checks proxy every N minutes, sends macOS notification if down, logs to `logs/uptime.csv`. Supports `--daemon`, `--install`, `--uninstall`
+- Cost alerts (`cost-alert.sh`) — checks estimated monthly spend from logs, sends macOS notification if over threshold. Supports `--threshold`, `--install`, `--uninstall`
+- Spend CSV export (`export-spend.sh`) — exports daily spend breakdown by date or by model. Supports `--days`, `--model`, `--output`
+- Makefile targets: `uptime`, `uptime-install`, `uptime-uninstall`, `cost-alert`, `cost-alert-install`, `cost-alert-uninstall`, `export-spend`
 - `make audit` target (`audit.sh`) — checks `.env` against `.env.example` for missing keys, placeholder values, and extra keys
 - `make rotate-key` target (`rotate-key.sh`) — prompts for a new API key, updates `.env`, and restarts the proxy
 - Structured JSON logging — `--json` flag on `litellm-local start` / `LITELLM_JSON_LOGS=true` env var enables LiteLLM's JSON log output

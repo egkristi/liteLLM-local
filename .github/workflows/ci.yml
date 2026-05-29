@@ -15,7 +15,7 @@ jobs:
       - name: Install shellcheck
         run: sudo apt-get update && sudo apt-get install -y shellcheck
       - name: Run shellcheck
-        run: shellcheck --shell=bash start.sh stop.sh status.sh test.sh usage.sh validate.sh install-autostart.sh audit.sh rotate-key.sh
+        run: shellcheck --shell=bash start.sh stop.sh status.sh test.sh usage.sh validate.sh install-autostart.sh audit.sh rotate-key.sh uptime-monitor.sh cost-alert.sh export-spend.sh completions/litellm-local
 
   lint-yaml:
     name: Validate YAML
