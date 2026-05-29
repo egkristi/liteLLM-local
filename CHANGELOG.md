@@ -15,6 +15,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Production config profile (`config.prod.yaml`) with master key and rate limiting settings
 - Automatic config reload — `--watch` flag / `LITELLM_RELOAD=true` enables LiteLLM's built-in `--reload` for hot-reloading config changes
 - `litellm-local config` command — validates config file structure, checks for duplicate models, missing fields, and env var references
+- `make validate` target (`validate.sh`) — checks `.env` keys are set, config is valid, and proxy is reachable
+- `make install-autostart` target (`install-autostart.sh`) — generates and loads a launchd plist for auto-starting the proxy on login
+- `make vscode-config` target (`scripts/generate_vscode_settings.py`) — regenerates `.vscode/settings.json` from `config.yaml` so they never drift out of sync
+- `LITELLM_MASTER_KEY` to `.env.example` for production config support
 - 14 new Ollama cloud models exposed through LiteLLM proxy (deepseek-v4-pro-cloud, deepseek-v4-flash-cloud, gemma4-31b-cloud, gemini-3-flash-cloud, glm-5.1-cloud, kimi-k2.5-cloud, kimi-k2.6-cloud, minimax-m2.7-cloud, ministral-3-3b-cloud, ministral-3-8b-cloud, ministral-3-14b-cloud, mistral-large-3-675b-cloud, qwen3.5-397b-cloud, qwen3-vl-235b-cloud, qwen3-vl-235b-instruct-cloud)
 - `nomic-embed-text` model for embeddings support
 - Updated `.vscode/settings.json` with VS Code Copilot Chat snippets for all new Ollama cloud models

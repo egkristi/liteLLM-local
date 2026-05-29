@@ -7,9 +7,9 @@
 - [x] Add support for multiple config profiles (e.g., `config.dev.yaml`, `config.prod.yaml`)
 - [x] Add automatic config reload without restarting the proxy
 - [x] Add a `litellm-local config` command to validate `config.yaml`
-- [ ] Add `make validate` — checks all `.env` keys are set and all models in `config.yaml` are reachable before starting
-- [ ] Add `make install-autostart` — generates and loads the correct launchd plist with the actual repo path (replaces manual plist editing)
-- [ ] Add `make vscode-config` — regenerates `.vscode/settings.json` from `config.yaml` so the two never drift out of sync
+- [x] Add `make validate` — checks all `.env` keys are set and all models in `config.yaml` are reachable before starting
+- [x] Add `make install-autostart` — generates and loads the correct launchd plist with the actual repo path (replaces manual plist editing)
+- [x] Add `make vscode-config` — regenerates `.vscode/settings.json` from `config.yaml` so the two never drift out of sync
 
 ## Next
 

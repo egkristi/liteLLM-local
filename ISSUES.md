@@ -6,6 +6,9 @@
 
 ## Closed
 
+### ISSUE-18: `config.prod.yaml` references `LITELLM_MASTER_KEY` but `.env.example` doesn't have it ✅
+Added `LITELLM_MASTER_KEY` to `.env.example`. Updated CI workflow to check all config files (not just `config.yaml`) for env var consistency.
+
 ### ISSUE-1: Missing Moonshot/Kimi provider configuration ✅
 Added `kimi-latest` model to `config.yaml` and `KIMI_API_KEY` to `.env.example`.
 
