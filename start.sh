@@ -23,7 +23,9 @@ if [ ! -f .env ]; then
 fi
 
 # shellcheck source=/dev/null
+set -a
 source .env
+set +a
 
 # --- Port handling (ISSUE-3) ---
 PORT="${PORT:-4000}"

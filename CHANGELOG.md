@@ -36,11 +36,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed ISSUE-12: replaced `curl` subprocess in `webui.py` with `urllib.request`
 - Fixed ISSUE-13: added `webui` subcommand to `litellm-local` wrapper
 - Fixed ISSUE-14: added `test.sh` smoke-test script for quick proxy validation
-- Fixed ISSUE-16: replaced Unicode em-dash in `.env` and `.env.example` comments with ASCII `--` to avoid shell parsing issues
-- Updated Ollama model from `qwen2.5-coder:14b` to `deepseek-v4-pro:cloud` (available locally)
-- Fixed `status.sh` Python f-string backslash syntax error (Python 3.9 compatibility)
-- Fixed `webui.py` Python 3.9 union type syntax (`dict | list | None` → `Union[dict, list, None]`)
-- Updated `AGENTS.md` with project overview, tech stack, file inventory, and testing notes
-- Cleaned up `ROADMAP.md` duplicate entries and reorganized sections
-- Updated `.vscode/settings.json` to reference `deepseek-local` instead of `qwen2.5-coder`
+- Fixed ISSUE-17: `start.sh` now exports `.env` variables to child processes using `set -a` / `set +a`
+  - Root cause of ISSUE-15: cloud providers now authenticate correctly
+  - Verified: DeepSeek responds "Hello! How can I help you today?"
 
