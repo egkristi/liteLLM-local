@@ -38,6 +38,13 @@ def cmd_usage(_args):
     return run([str(SCRIPT_DIR / "usage.sh")])
 
 
+def cmd_webui(args):
+    env = os.environ.copy()
+    if args.port:
+        env["WEBUI_PORT"] = args.port
+    return run([sys.executable, str(SCRIPT_DIR / "webui.py")], env=env)
+
+
 def main():
     parser = argparse.ArgumentParser(
         prog="litellm-local",
@@ -50,6 +57,8 @@ def main():
     sub.add_parser("stop", help="Stop the proxy")
     sub.add_parser("status", help="Check proxy health")
     sub.add_parser("usage", help="Show recent usage from logs")
+    webui_parser = sub.add_parser("webui", help="Start the web dashboard")
+    webui_parser.add_argument("--port", default=None, help="Dashboard port (default: 8080)")
 
     args = parser.parse_args()
     handlers = {
@@ -57,6 +66,7 @@ def main():
         "stop": cmd_stop,
         "status": cmd_status,
         "usage": cmd_usage,
+        "webui": cmd_webui,
     }
     sys.exit(handlers[args.command](args))
 

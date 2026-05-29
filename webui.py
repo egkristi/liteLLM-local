@@ -14,7 +14,7 @@ Usage:
 
 import json
 import os
-import subprocess
+import urllib.request
 from datetime import datetime
 from http.server import HTTPServer, SimpleHTTPRequestHandler
 from pathlib import Path
@@ -25,40 +25,30 @@ PROXY_PORT = os.environ.get("PORT", "4000")
 WEBUI_PORT = int(os.environ.get("WEBUI_PORT", "8080"))
 
 
+def _proxy_json(path: str) -> dict | list | None:
+    """Fetch JSON from the LiteLLM proxy using urllib (no curl dependency)."""
+    try:
+        url = f"http://localhost:{PROXY_PORT}{path}"
+        with urllib.request.urlopen(url, timeout=5) as resp:
+            return json.loads(resp.read().decode("utf-8"))
+    except Exception:
+        return None
+
+
 def proxy_status():
     """Check if the LiteLLM proxy is responding."""
-    try:
-        result = subprocess.run(
-            ["curl", "-sf", f"http://localhost:{PROXY_PORT}/health"],
-            capture_output=True,
-            text=True,
-            timeout=5,
-        )
-        if result.returncode == 0:
-            try:
-                return json.loads(result.stdout)
-            except json.JSONDecodeError:
-                return {"status": "ok", "raw": result.stdout}
-        return {"status": "down", "error": "Proxy not responding"}
-    except Exception as e:
-        return {"status": "error", "error": str(e)}
+    data = _proxy_json("/health")
+    if data is not None:
+        return data if isinstance(data, dict) else {"status": "ok", "raw": data}
+    return {"status": "down", "error": "Proxy not responding"}
 
 
 def list_models():
     """Fetch available models from the proxy."""
-    try:
-        result = subprocess.run(
-            ["curl", "-sf", f"http://localhost:{PROXY_PORT}/v1/models"],
-            capture_output=True,
-            text=True,
-            timeout=5,
-        )
-        if result.returncode == 0:
-            data = json.loads(result.stdout)
-            return [m["id"] for m in data.get("data", [])]
-        return []
-    except Exception:
-        return []
+    data = _proxy_json("/v1/models")
+    if data is not None and isinstance(data, dict):
+        return [m["id"] for m in data.get("data", [])]
+    return []
 
 
 def recent_logs(n=100):

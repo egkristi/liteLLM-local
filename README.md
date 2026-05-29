@@ -24,122 +24,86 @@ Tested providers in this setup:
 
 ---
 
-## Installation
-
-Install `uv` if you don't have it:
+## Quick start
 
 ```bash
-curl -LsSf https://astral.sh/uv/install.sh | sh
-```
+# 1. Install uv and LiteLLM
+make install
 
-Install LiteLLM:
+# 2. Copy the env template and add your keys
+cp .env.example .env
+# edit .env with your API keys
 
-```bash
-uv tool install 'litellm[proxy]'
-```
-
-> **Why uv over pip or Docker?** `uv` is significantly faster than pip, handles dependencies cleanly in isolated environments, and is far simpler than Docker for a local proxy. No containers, no port mapping complexity, no daemon to manage.
-
----
-
-## Configuration
-
-Create a `config.yaml` in this repo:
-
-```yaml
-model_list:
-  # DeepSeek — best for coding
-  - model_name: deepseek-v4-pro
-    litellm_params:
-      model: deepseek/deepseek-chat
-      api_key: os.environ/DEEPSEEK_API_KEY
-
-  # Anthropic Claude
-  - model_name: claude-sonnet
-    litellm_params:
-      model: anthropic/claude-sonnet-4-6
-      api_key: os.environ/ANTHROPIC_API_KEY
-
-  - model_name: claude-opus
-    litellm_params:
-      model: anthropic/claude-opus-4-6
-      api_key: os.environ/ANTHROPIC_API_KEY
-
-  # Groq — fast inference
-  - model_name: groq-llama
-    litellm_params:
-      model: groq/llama-3.3-70b-versatile
-      api_key: os.environ/GROQ_API_KEY
-
-  # Mistral — strong European models
-  - model_name: mistral-large
-    litellm_params:
-      model: mistral/mistral-large-latest
-      api_key: os.environ/MISTRAL_API_KEY
-
-  - model_name: codestral
-    litellm_params:
-      model: mistral/codestral-latest
-      api_key: os.environ/MISTRAL_API_KEY
-
-  # Ollama — local, free
-  - model_name: qwen2.5-coder
-    litellm_params:
-      model: ollama/qwen2.5-coder:14b
-      api_base: http://localhost:11434
-
-litellm_settings:
-  drop_params: true        # strips unsupported params (fixes DeepSeek reasoning_content issue)
-  set_verbose: false
-```
-
-Create a `.env` file (never commit this):
-
-```env
-DEEPSEEK_API_KEY=sk-...
-ANTHROPIC_API_KEY=sk-ant-...
-GROQ_API_KEY=gsk_...
-MISTRAL_API_KEY=...
-```
-
----
-
-## Running
-
-```bash
-# Load env vars and start the proxy
-source .env && uv tool run litellm --config config.yaml --port 4000
-```
-
-Or use the included start script:
-
-```bash
-./start.sh
+# 3. Start the proxy
+make start
 ```
 
 The proxy will be available at `http://localhost:4000`.
 
 ---
 
-## VS Code Copilot Chat Setup
+## Configuration
 
-Add to your VS Code `settings.json`:
+Models, API keys, and settings are defined in [`config.yaml`](config.yaml).  
+API keys live in `.env` (gitignored — never commit it).  
+See [`.env.example`](.env.example) for the required variables.
 
-```json
-"github.copilot.chat.languageModels": [
-  {
-    "name": "LiteLLM Local",
-    "vendor": "openai",
-    "url": "http://localhost:4000/v1",
-    "apiKey": "anything",
-    "model": "deepseek-v4-pro"
-  }
-]
+To add custom models, follow [`docs/ADDING_MODELS.md`](docs/ADDING_MODELS.md).
+
+---
+
+## Daily commands
+
+| Command | What it does |
+|---|---|
+| `make start` | Start the proxy (with prerequisite checks) |
+| `make stop` | Stop the proxy |
+| `make status` | Health check + list available models |
+| `make usage` | Show recent usage / cost from logs |
+| `make logs` | Tail the latest log file |
+| `make install` | Install `uv` and `litellm` if missing |
+| `./test.sh` | Send a smoke-test chat completion |
+| `./webui.py` | Open the web dashboard (port 8080) |
+| `./litellm-local webui` | Same, via the Python wrapper |
+
+You can also run any script directly, e.g.:
+
+```bash
+PORT=4001 ./start.sh   # start on a custom port
+WEBUI_PORT=8081 ./webui.py  # dashboard on a custom port
 ```
 
-> The `apiKey` field can be any non-empty string — authentication is handled by LiteLLM using your provider keys.
+---
 
-Switch models by changing the `model` field to any name defined in `config.yaml`.
+## VS Code Copilot Chat Setup
+
+Copy the snippet from [`.vscode/settings.json`](.vscode/settings.json) into your user `settings.json`.  
+It includes commented entries for every configured model — uncomment the one you want to use.
+
+---
+
+## Monitoring (optional)
+
+A Prometheus + Grafana stack is included for metrics and dashboards.
+
+```bash
+docker compose -f docker-compose.monitoring.yml up -d
+```
+
+- Prometheus: http://localhost:9090
+- Grafana: http://localhost:3000 (admin / `admin` or set `GRAFANA_PASSWORD`)
+- Pre-loaded dashboard: **LiteLLM Overview** (request rate, spend, latency, model breakdown)
+
+---
+
+## Docker (alternative to uv)
+
+```bash
+docker compose up -d
+```
+
+The container reads `./config.yaml` and `./.env` from the host.  
+Logs are persisted to `./logs` via a volume mount.
 
 ---
 
@@ -192,6 +156,10 @@ launchctl load ~/Library/LaunchAgents/com.litellm.local.plist
 
 ```
 liteLLM-local/
+├── AGENTS.md            # AI agent workflow instructions
+├── CHANGELOG.md         # release history
+├── ISSUES.md            # known issues & fixes
+├── ROADMAP.md           # planned features
 ├── config.yaml          # model definitions
 ├── .env                 # API keys (gitignored)
 ├── .env.example         # template for .env
@@ -200,6 +168,7 @@ liteLLM-local/
 ├── stop.sh              # stop the proxy
 ├── status.sh            # health check & model list
 ├── usage.sh             # quick usage/cost from logs
+├── test.sh              # smoke-test chat completion
 ├── webui.py             # zero-dependency web dashboard
 ├── Makefile             # common commands (make start, make status, ...)
 ├── litellm-local        # cross-platform Python wrapper
@@ -214,20 +183,5 @@ liteLLM-local/
 │   └── settings.json    # VS Code Copilot Chat snippet
 ├── docs/
 │   └── ADDING_MODELS.md # how to add custom models
-├── ISSUES.md            # known issues & fixes
-├── ROADMAP.md           # planned features
-├── CHANGELOG.md         # release history
 └── README.md
-```
-
----
-
-## .gitignore
-
-Make sure `.env` is never committed:
-
-```
-.env
-__pycache__/
-*.pyc
 ```

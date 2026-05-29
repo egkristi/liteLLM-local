@@ -32,4 +32,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added zero-dependency web UI (`webui.py`) served on port 8080
   - Displays proxy health, available models, usage summary, and recent logs
   - No external dependencies — uses only Python standard library
+- Fixed ISSUE-11: rewrote README with quick-start, commands table, monitoring, Docker, and updated file tree
+- Fixed ISSUE-12: replaced `curl` subprocess in `webui.py` with `urllib.request`
+- Fixed ISSUE-13: added `webui` subcommand to `litellm-local` wrapper
+- Fixed ISSUE-14: added `test.sh` smoke-test script for quick proxy validation
 
