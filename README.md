@@ -200,6 +200,7 @@ liteLLM-local/
 ├── stop.sh              # stop the proxy
 ├── status.sh            # health check & model list
 ├── usage.sh             # quick usage/cost from logs
+├── webui.py             # zero-dependency web dashboard
 ├── Makefile             # common commands (make start, make status, ...)
 ├── litellm-local        # cross-platform Python wrapper
 ├── docker-compose.yml   # Docker alternative to uv

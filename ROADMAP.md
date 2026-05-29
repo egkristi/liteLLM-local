@@ -24,7 +24,7 @@
 
 ## Later
 
-- [ ] Add a web UI for viewing logs, usage, and managing models
+- [x] Add a web UI for viewing logs, usage, and managing models
 
 ## Done
 

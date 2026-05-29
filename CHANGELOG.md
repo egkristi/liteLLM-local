@@ -29,4 +29,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added Prometheus/Grafana monitoring stack (`docker-compose.monitoring.yml`, `monitoring/`)
   - Prometheus scrapes LiteLLM metrics at `/metrics`
   - Grafana pre-loaded with LiteLLM Overview dashboard (request rate, spend, latency, model breakdown)
+- Added zero-dependency web UI (`webui.py`) served on port 8080
+  - Displays proxy health, available models, usage summary, and recent logs
+  - No external dependencies — uses only Python standard library
 
