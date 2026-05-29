@@ -18,7 +18,7 @@ Tested providers in this setup:
 
 ## Prerequisites
 
-- Python 3.9+
+- [uv](https://docs.astral.sh/uv/) (recommended Python package manager)
 - [Ollama](https://ollama.com) installed and running (for local models)
 - API keys for the providers you want to use
 
@@ -26,9 +26,19 @@ Tested providers in this setup:
 
 ## Installation
 
+Install `uv` if you don't have it:
+
 ```bash
-pip install litellm[proxy]
+curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
+
+Install LiteLLM:
+
+```bash
+uv tool install 'litellm[proxy]'
+```
+
+> **Why uv over pip or Docker?** `uv` is significantly faster than pip, handles dependencies cleanly in isolated environments, and is far simpler than Docker for a local proxy. No containers, no port mapping complexity, no daemon to manage.
 
 ---
 
@@ -61,6 +71,17 @@ model_list:
       model: groq/llama-3.3-70b-versatile
       api_key: os.environ/GROQ_API_KEY
 
+  # Mistral — strong European models
+  - model_name: mistral-large
+    litellm_params:
+      model: mistral/mistral-large-latest
+      api_key: os.environ/MISTRAL_API_KEY
+
+  - model_name: codestral
+    litellm_params:
+      model: mistral/codestral-latest
+      api_key: os.environ/MISTRAL_API_KEY
+
   # Ollama — local, free
   - model_name: qwen2.5-coder
     litellm_params:
@@ -78,6 +99,7 @@ Create a `.env` file (never commit this):
 DEEPSEEK_API_KEY=sk-...
 ANTHROPIC_API_KEY=sk-ant-...
 GROQ_API_KEY=gsk_...
+MISTRAL_API_KEY=...
 ```
 
 ---
@@ -86,7 +108,7 @@ GROQ_API_KEY=gsk_...
 
 ```bash
 # Load env vars and start the proxy
-source .env && litellm --config config.yaml --port 4000
+source .env && uv tool run litellm --config config.yaml --port 4000
 ```
 
 Or use the included start script:
@@ -137,7 +159,7 @@ cat > ~/Library/LaunchAgents/com.litellm.local.plist << EOF
   <array>
     <string>/bin/bash</string>
     <string>-c</string>
-    <string>cd /path/to/liteLLM-local && source .env && litellm --config config.yaml --port 4000</string>
+    <string>cd /path/to/liteLLM-local && source .env && uv tool run litellm --config config.yaml --port 4000</string>
   </array>
   <key>RunAtLoad</key>
   <true/>
@@ -159,6 +181,8 @@ launchctl load ~/Library/LaunchAgents/com.litellm.local.plist
 | DeepSeek (direct) | deepseek-chat (V4 Pro) | $0.44 | $0.87 |
 | Anthropic (direct) | claude-sonnet-4-6 | $3.00 | $15.00 |
 | Groq (direct) | llama-3.3-70b | ~$0.59 | ~$0.79 |
+| Mistral (direct) | mistral-large-latest | $2.00 | $6.00 |
+| Mistral (direct) | codestral-latest | $0.30 | $0.90 |
 | Ollama local | qwen2.5-coder:14b | free | free |
 | OpenRouter | (same models) | +10–15% markup | +10–15% markup |
 
