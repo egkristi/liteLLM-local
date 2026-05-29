@@ -25,6 +25,10 @@ def cmd_start(args):
         env["LITELLM_RELOAD"] = "true"
     if args.json_logs:
         env["LITELLM_JSON_LOGS"] = "true"
+    if args.cache:
+        env["LITELLM_CACHE"] = "true"
+    if args.cache_port:
+        env["LITELLM_CACHE_PORT"] = args.cache_port
     return run([str(SCRIPT_DIR / "start.sh")], env=env)
 
 
@@ -145,6 +149,8 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--config", default=None, help="Config file (default: config.yaml)")
     parser.add_argument("--watch", action="store_true", help="Auto-reload on config changes")
     parser.add_argument("--json", action="store_true", dest="json_logs", help="Enable JSON logging")
+    parser.add_argument("--cache", action="store_true", help="Enable response caching")
+    parser.add_argument("--cache-port", default=None, help="Cache proxy frontend port (default: 4001)")
     sub = parser.add_subparsers(dest="command", required=True)
 
     sub.add_parser("start", help="Start the proxy")

@@ -66,4 +66,17 @@ if [ "${LITELLM_JSON_LOGS:-}" = "true" ]; then
   echo "JSON logging enabled"
 fi
 
-exec uv tool run litellm --config "$CONFIG" --port "$PORT" $RELOAD_FLAG $JSON_FLAG 2>&1 | tee "logs/litellm-$(date +%Y%m%d-%H%M%S).log"
+# --- Cache proxy mode ---
+LITELLM_PORT="$PORT"
+if [ "${LITELLM_CACHE:-}" = "true" ]; then
+  CACHE_PORT="${LITELLM_CACHE_PORT:-4001}"
+  echo "Cache proxy enabled (frontend: $CACHE_PORT, backend: $LITELLM_PORT)"
+  # Start cache proxy in background
+  python3 "$SCRIPT_DIR/cache-proxy.py" --port "$CACHE_PORT" --backend "$LITELLM_PORT" &
+  CACHE_PID=$!
+  echo "Cache proxy PID: $CACHE_PID"
+  # Give it a moment to start
+  sleep 1
+fi
+
+exec uv tool run litellm --config "$CONFIG" --port "$LITELLM_PORT" $RELOAD_FLAG $JSON_FLAG 2>&1 | tee "logs/litellm-$(date +%Y%m%d-%H%M%S).log"

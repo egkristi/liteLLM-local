@@ -67,3 +67,9 @@ export-spend: ## Export daily spend to CSV (DAYS=7 make export-spend)
 
 benchmark: ## Benchmark model latency and cost (MODELS=deepseek-v4-pro,groq-llama make benchmark)
 	@./benchmark.sh $(if $(MODELS),--models $(MODELS),) $(if $(PROMPTS),--prompts $(PROMPTS),) $(if $(LOCAL),--local,) $(if $(ALL),--all,) $(if $(OUTPUT),--output $(OUTPUT),)
+
+cache-stats: ## Show cache proxy statistics
+	@python3 cache-proxy.py --stats
+
+cache-clear: ## Clear all cached responses
+	@python3 cache-proxy.py --clear

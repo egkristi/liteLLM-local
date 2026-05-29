@@ -14,10 +14,8 @@
 ## Next
 
 - [ ] Add a TUI (terminal UI) alternative to the web dashboard
-- [ ] Add request caching layer for repeated prompts
-- [ ] Add rate-limiting per model / per provider
+- [ ] Rate-limiting per model / per provider
 - [ ] Add support for AWS Bedrock and Google Vertex AI providers
-- [ ] Per-user virtual keys with monthly spend caps — so family members each get a key with a budget limit (e.g. $5/month), preventing one heavy session from eating the shared budget
 - [ ] Per-user virtual keys with monthly spend caps — so family members each get a key with a budget limit (e.g. $5/month), preventing one heavy session from eating the shared budget
 
 ## Later
@@ -59,3 +57,4 @@
 - [x] Cost alerts via macOS notification (`osascript`) when monthly spend crosses a configurable threshold
 - [x] Export daily spend to `spend.csv` (model, tokens, cost) for analysis in Excel/Numbers
 - [x] Model benchmarking script (`benchmark.sh`) — sends a standard set of coding prompts to each model and reports latency + cost
+- [x] Request caching layer (`cache-proxy.py`) — SQLite-backed cache for repeated prompts, configurable TTL, cache-hit stats
