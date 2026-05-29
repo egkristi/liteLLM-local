@@ -2,7 +2,17 @@
 
 ## Open
 
-*None currently.*
+### ISSUE-15: Cloud provider API keys return 401 Unauthorized
+The proxy health check shows all cloud providers (DeepSeek, Anthropic, Groq, Mistral, Kimi) failing with authentication errors. The API keys in `.env` may be invalid, or there may be an encoding issue in the `.env` file preventing proper loading. The local Ollama model works correctly.
+
+**Impact:** Cloud models are unavailable; only local Ollama models work.
+**Fix:** Verify API keys are valid and check `.env` file encoding. Consider regenerating keys from provider dashboards.
+
+### ISSUE-16: `start.sh` env var loading may fail with special characters in `.env`
+The `.env` file contains a special Unicode character (`—` em-dash) in the comment line. When `source .env` runs in `start.sh`, this may cause parsing issues on some shells, preventing API keys from being exported to the proxy process.
+
+**Impact:** Proxy starts but without API keys, causing all cloud provider requests to fail.
+**Fix:** Replace special Unicode characters in `.env` comments with plain ASCII equivalents.
 
 ## Closed
 

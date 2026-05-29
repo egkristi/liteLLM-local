@@ -36,4 +36,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed ISSUE-12: replaced `curl` subprocess in `webui.py` with `urllib.request`
 - Fixed ISSUE-13: added `webui` subcommand to `litellm-local` wrapper
 - Fixed ISSUE-14: added `test.sh` smoke-test script for quick proxy validation
+- Fixed ISSUE-16: replaced Unicode em-dash in `.env` and `.env.example` comments with ASCII `--` to avoid shell parsing issues
+- Updated Ollama model from `qwen2.5-coder:14b` to `deepseek-v4-pro:cloud` (available locally)
+- Fixed `status.sh` Python f-string backslash syntax error (Python 3.9 compatibility)
 

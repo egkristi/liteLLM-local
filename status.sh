@@ -24,7 +24,8 @@ curl -sf "$URL/v1/models" 2>/dev/null | python3 -c '
 import sys, json
 data = json.load(sys.stdin)
 for m in data.get("data", []):
-    print(f"  - {m[\"id\"]}")
+    model_id = m["id"]
+    print(f"  - {model_id}")
 ' 2>/dev/null || echo "  (could not parse model list)"
 
 echo ""
