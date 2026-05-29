@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- Model benchmarking script (`benchmark.sh`) — sends standard coding prompts to each model, reports latency and estimated cost. Supports `--models`, `--prompts`, `--local`, `--all`, `--output`, `--json`. Results saved to `logs/benchmark-*.csv`
+- Makefile target: `benchmark` (with `MODELS`, `PROMPTS`, `LOCAL`, `ALL`, `OUTPUT` variables)
+- `benchmark.sh` added to CI shellcheck
 - `docs/PROVIDERS.md` — reference for all providers: where to get a key, LiteLLM model string, current pricing
 - `docs/TROUBLESHOOTING.md` — document known issues: DeepSeek `reasoning_content` fix, Ollama cloud vs local, VS Code 402 errors, rate limit handling
 - `docs/FAMILY_SETUP.md` — guide for adding a family member: virtual key with budget cap, VS Code setup, which models to use for what

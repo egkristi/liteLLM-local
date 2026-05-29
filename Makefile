@@ -64,3 +64,6 @@ cost-alert-uninstall: ## Remove cost alert launchd agent
 
 export-spend: ## Export daily spend to CSV (DAYS=7 make export-spend)
 	@./export-spend.sh $(if $(DAYS),--days $(DAYS),) $(if $(BY_MODEL),--model,) $(if $(OUTPUT),--output $(OUTPUT),)
+
+benchmark: ## Benchmark model latency and cost (MODELS=deepseek-v4-pro,groq-llama make benchmark)
+	@./benchmark.sh $(if $(MODELS),--models $(MODELS),) $(if $(PROMPTS),--prompts $(PROMPTS),) $(if $(LOCAL),--local,) $(if $(ALL),--all,) $(if $(OUTPUT),--output $(OUTPUT),)
