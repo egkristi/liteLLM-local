@@ -5,6 +5,7 @@ services:
       - "${PORT:-4000}:4000"
     volumes:
       - ./config.yaml:/app/config.yaml:ro
+      - ./logs:/app/logs
     environment:
       - DEEPSEEK_API_KEY=${DEEPSEEK_API_KEY}
       - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}

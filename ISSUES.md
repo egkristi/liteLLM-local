@@ -23,3 +23,15 @@ Configured `litellm_settings.log_file` and `logs/` directory creation in `start.
 
 ### ISSUE-6: No usage / cost tracking ✅
 Enabled `spend_logs: true` in `config.yaml` and created `usage.sh` for quick log-based usage inspection.
+
+### ISSUE-7: `docker-compose.yml` does not persist logs ✅
+Added `./logs:/app/logs` volume mount to `docker-compose.yml`.
+
+### ISSUE-8: `docker-compose.yml` port mapping inconsistency ✅
+Documented that `PORT` only affects host mapping; container port remains 4000. Verified `healthcheck` uses correct internal port.
+
+### ISSUE-9: `Makefile` `logs` target fails with multiple log files ✅
+Changed `tail -f logs/*.log` to `ls -t logs/*.log | head -n 1` so only the most recent file is tailed.
+
+### ISSUE-10: `.vscode/settings.json` only includes a single model ✅
+Added commented snippets for all configured models so users can quickly switch by uncommenting.

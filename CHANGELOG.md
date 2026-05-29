@@ -22,4 +22,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added `docs/ADDING_MODELS.md` guide for extending model configuration
 - Added `docker-compose.yml` and `.dockerignore` for Docker-based deployment
 - Added automatic model fallback chain (`fallback-deepseek` → `claude-sonnet` → `groq-llama`)
+- Fixed ISSUE-7: added `logs/` volume mount to `docker-compose.yml` for persistent container logs
+- Fixed ISSUE-8: clarified Docker `PORT` behavior (host-only mapping)
+- Fixed ISSUE-9: `Makefile` `logs` target now tails only the most recent log file
+- Fixed ISSUE-10: `.vscode/settings.json` includes commented snippets for all configured models
 

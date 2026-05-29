@@ -25,4 +25,5 @@ usage: ## Show recent usage/cost from logs
 	@./usage.sh
 
 logs: ## Tail the latest log file
-	@tail -f logs/*.log 2>/dev/null || echo "No logs yet. Start the proxy first."
+	@LATEST=$$(ls -t logs/*.log 2>/dev/null | head -n 1); \
+	if [ -n "$$LATEST" ]; then tail -f "$$LATEST"; else echo "No logs yet. Start the proxy first."; fi
