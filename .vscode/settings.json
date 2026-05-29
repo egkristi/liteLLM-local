@@ -15,6 +15,23 @@
     // { "name": "LiteLLM Codestral", "vendor": "openai", "url": "http://localhost:4000/v1", "apiKey": "anything", "model": "codestral" },
     // { "name": "LiteLLM Kimi", "vendor": "openai", "url": "http://localhost:4000/v1", "apiKey": "anything", "model": "kimi-latest" },
     // { "name": "LiteLLM Local", "vendor": "openai", "url": "http://localhost:4000/v1", "apiKey": "anything", "model": "deepseek-local" },
+    // { "name": "LiteLLM Qwen Coder", "vendor": "openai", "url": "http://localhost:4000/v1", "apiKey": "anything", "model": "qwen2.5-coder" },
+    // { "name": "LiteLLM DeepSeek V4 Cloud", "vendor": "openai", "url": "http://localhost:4000/v1", "apiKey": "anything", "model": "deepseek-v4-pro-cloud" },
+    // { "name": "LiteLLM DeepSeek V4 Flash", "vendor": "openai", "url": "http://localhost:4000/v1", "apiKey": "anything", "model": "deepseek-v4-flash-cloud" },
+    // { "name": "LiteLLM Gemma 4 31B", "vendor": "openai", "url": "http://localhost:4000/v1", "apiKey": "anything", "model": "gemma4-31b-cloud" },
+    // { "name": "LiteLLM Gemini 3 Flash", "vendor": "openai", "url": "http://localhost:4000/v1", "apiKey": "anything", "model": "gemini-3-flash-cloud" },
+    // { "name": "LiteLLM GLM 5.1", "vendor": "openai", "url": "http://localhost:4000/v1", "apiKey": "anything", "model": "glm-5.1-cloud" },
+    // { "name": "LiteLLM Kimi K2.5", "vendor": "openai", "url": "http://localhost:4000/v1", "apiKey": "anything", "model": "kimi-k2.5-cloud" },
+    // { "name": "LiteLLM Kimi K2.6", "vendor": "openai", "url": "http://localhost:4000/v1", "apiKey": "anything", "model": "kimi-k2.6-cloud" },
+    // { "name": "LiteLLM MiniMax M2.7", "vendor": "openai", "url": "http://localhost:4000/v1", "apiKey": "anything", "model": "minimax-m2.7-cloud" },
+    // { "name": "LiteLLM Ministral 3B", "vendor": "openai", "url": "http://localhost:4000/v1", "apiKey": "anything", "model": "ministral-3-3b-cloud" },
+    // { "name": "LiteLLM Ministral 8B", "vendor": "openai", "url": "http://localhost:4000/v1", "apiKey": "anything", "model": "ministral-3-8b-cloud" },
+    // { "name": "LiteLLM Ministral 14B", "vendor": "openai", "url": "http://localhost:4000/v1", "apiKey": "anything", "model": "ministral-3-14b-cloud" },
+    // { "name": "LiteLLM Mistral Large 3", "vendor": "openai", "url": "http://localhost:4000/v1", "apiKey": "anything", "model": "mistral-large-3-675b-cloud" },
+    // { "name": "LiteLLM Qwen 3.5 397B", "vendor": "openai", "url": "http://localhost:4000/v1", "apiKey": "anything", "model": "qwen3.5-397b-cloud" },
+    // { "name": "LiteLLM Qwen 3 VL 235B", "vendor": "openai", "url": "http://localhost:4000/v1", "apiKey": "anything", "model": "qwen3-vl-235b-cloud" },
+    // { "name": "LiteLLM Qwen 3 VL Instruct", "vendor": "openai", "url": "http://localhost:4000/v1", "apiKey": "anything", "model": "qwen3-vl-235b-instruct-cloud" },
+    // { "name": "LiteLLM Nomic Embed", "vendor": "openai", "url": "http://localhost:4000/v1", "apiKey": "anything", "model": "nomic-embed-text" },
     // { "name": "LiteLLM Fallback", "vendor": "openai", "url": "http://localhost:4000/v1", "apiKey": "anything", "model": "fallback-deepseek" }
   ]
 }

@@ -12,8 +12,9 @@ __pycache__/
 .DS_Store
 
 # IDE
-.vscode/
 .idea/
+# .vscode/ is intentionally NOT ignored — we share Copilot Chat snippets
+# User-specific VS Code settings should go in .vscode/settings.json.local
 
 # Logs
 *.log

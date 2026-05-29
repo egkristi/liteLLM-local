@@ -8,6 +8,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- 14 new Ollama cloud models exposed through LiteLLM proxy (deepseek-v4-pro-cloud, deepseek-v4-flash-cloud, gemma4-31b-cloud, gemini-3-flash-cloud, glm-5.1-cloud, kimi-k2.5-cloud, kimi-k2.6-cloud, minimax-m2.7-cloud, ministral-3-3b-cloud, ministral-3-8b-cloud, ministral-3-14b-cloud, mistral-large-3-675b-cloud, qwen3.5-397b-cloud, qwen3-vl-235b-cloud, qwen3-vl-235b-instruct-cloud)
+- Updated `.vscode/settings.json` with VS Code Copilot Chat snippets for all new Ollama cloud models
+
+### Added
 - Initial project scaffold: `config.yaml`, `start.sh`, `.env.example`, `.gitignore`
 - Added Moonshot / Kimi model (`kimi-latest`) to `config.yaml` and `KIMI_API_KEY` to `.env.example`
 - Added `status.sh` for health checks and model listing
@@ -39,4 +43,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed ISSUE-17: `start.sh` now exports `.env` variables to child processes using `set -a` / `set +a`
   - Root cause of ISSUE-15: cloud providers now authenticate correctly
   - Verified: DeepSeek responds "Hello! How can I help you today?"
+- Fixed broken GitHub link in README: `.vscode/settings.json` was gitignored
+  - Removed `.vscode/` from `.gitignore` so shared Copilot Chat snippets are tracked
+  - File is now accessible at https://github.com/egkristi/liteLLM-local/blob/main/.vscode/settings.json
 
