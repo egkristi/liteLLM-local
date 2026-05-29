@@ -1,78 +1,300 @@
 {
   "github.copilot.chat.languageModels": [
     {
-        "name": "LiteLLM Deepseek V4 Pro",
-        "vendor": "openai",
-        "url": "http://localhost:4000/v1",
-        "apiKey": "anything",
-        "model": "deepseek-v4-pro"
-    },
-    // {"name": "LiteLLM Claude Sonnet", "vendor": "openai", "url": "http://localhost:4000/v1", "apiKey": "anything", "model": "claude-sonnet"},
-    // {"name": "LiteLLM Claude Opus", "vendor": "openai", "url": "http://localhost:4000/v1", "apiKey": "anything", "model": "claude-opus"},
-    // {"name": "LiteLLM Groq Llama", "vendor": "openai", "url": "http://localhost:4000/v1", "apiKey": "anything", "model": "groq-llama"},
-    // {"name": "LiteLLM Mistral Large", "vendor": "openai", "url": "http://localhost:4000/v1", "apiKey": "anything", "model": "mistral-large"},
-    // {"name": "LiteLLM Codestral", "vendor": "openai", "url": "http://localhost:4000/v1", "apiKey": "anything", "model": "codestral"},
-    // {"name": "LiteLLM Kimi Latest", "vendor": "openai", "url": "http://localhost:4000/v1", "apiKey": "anything", "model": "kimi-latest"},
-    // {"name": "LiteLLM Deepseek Local", "vendor": "openai", "url": "http://localhost:4000/v1", "apiKey": "anything", "model": "deepseek-local"},
-    // {"name": "LiteLLM Qwen2.5 Coder", "vendor": "openai", "url": "http://localhost:4000/v1", "apiKey": "anything", "model": "qwen2.5-coder"},
-    // {"name": "LiteLLM Deepseek V4 Pro Cloud", "vendor": "openai", "url": "http://localhost:4000/v1", "apiKey": "anything", "model": "deepseek-v4-pro-cloud"},
-    // {"name": "LiteLLM Deepseek V4 Flash Cloud", "vendor": "openai", "url": "http://localhost:4000/v1", "apiKey": "anything", "model": "deepseek-v4-flash-cloud"},
-    // {"name": "LiteLLM Gemma4 31B Cloud", "vendor": "openai", "url": "http://localhost:4000/v1", "apiKey": "anything", "model": "gemma4-31b-cloud"},
-    // {"name": "LiteLLM Gemini 3 Flash Cloud", "vendor": "openai", "url": "http://localhost:4000/v1", "apiKey": "anything", "model": "gemini-3-flash-cloud"},
-    // {"name": "LiteLLM Glm 5.1 Cloud", "vendor": "openai", "url": "http://localhost:4000/v1", "apiKey": "anything", "model": "glm-5.1-cloud"},
-    // {"name": "LiteLLM Kimi K2.5 Cloud", "vendor": "openai", "url": "http://localhost:4000/v1", "apiKey": "anything", "model": "kimi-k2.5-cloud"},
-    // {"name": "LiteLLM Kimi K2.6 Cloud", "vendor": "openai", "url": "http://localhost:4000/v1", "apiKey": "anything", "model": "kimi-k2.6-cloud"},
-    // {"name": "LiteLLM Minimax M2.7 Cloud", "vendor": "openai", "url": "http://localhost:4000/v1", "apiKey": "anything", "model": "minimax-m2.7-cloud"},
-    // {"name": "LiteLLM Ministral 3 3B Cloud", "vendor": "openai", "url": "http://localhost:4000/v1", "apiKey": "anything", "model": "ministral-3-3b-cloud"},
-    // {"name": "LiteLLM Ministral 3 8B Cloud", "vendor": "openai", "url": "http://localhost:4000/v1", "apiKey": "anything", "model": "ministral-3-8b-cloud"},
-    // {"name": "LiteLLM Ministral 3 14B Cloud", "vendor": "openai", "url": "http://localhost:4000/v1", "apiKey": "anything", "model": "ministral-3-14b-cloud"},
-    // {"name": "LiteLLM Mistral Large 3 675B Cloud", "vendor": "openai", "url": "http://localhost:4000/v1", "apiKey": "anything", "model": "mistral-large-3-675b-cloud"},
-    // {"name": "LiteLLM Qwen3.5 397B Cloud", "vendor": "openai", "url": "http://localhost:4000/v1", "apiKey": "anything", "model": "qwen3.5-397b-cloud"},
-    // {"name": "LiteLLM Qwen3 Vl 235B Cloud", "vendor": "openai", "url": "http://localhost:4000/v1", "apiKey": "anything", "model": "qwen3-vl-235b-cloud"},
-    // {"name": "LiteLLM Qwen3 Vl 235B Instruct Cloud", "vendor": "openai", "url": "http://localhost:4000/v1", "apiKey": "anything", "model": "qwen3-vl-235b-instruct-cloud"},
-    // {"name": "LiteLLM Nomic Embed", "vendor": "openai", "url": "http://localhost:4000/v1", "apiKey": "anything", "model": "nomic-embed-text"},
-    // {"name": "LiteLLM Fallback Deepseek", "vendor": "openai", "url": "http://localhost:4000/v1", "apiKey": "anything", "model": "fallback-deepseek"},
-    {
-        "name": "\u2b50 Best Coding \u2192 deepseek-v4-pro",
-        "vendor": "openai",
-        "url": "http://localhost:4000/v1",
-        "apiKey": "anything",
-        "model": "best-coding"
-    },
-    {
-        "name": "\u2b50 Best Chat \u2192 claude-sonnet",
-        "vendor": "openai",
-        "url": "http://localhost:4000/v1",
-        "apiKey": "anything",
-        "model": "best-chat"
-    },
-    {
-        "name": "\u2b50 Fast \u2192 groq-llama",
-        "vendor": "openai",
-        "url": "http://localhost:4000/v1",
-        "apiKey": "anything",
-        "model": "fast"
-    },
-    {
-        "name": "\u2b50 Cheap \u2192 deepseek-v4-flash-cloud",
-        "vendor": "openai",
-        "url": "http://localhost:4000/v1",
-        "apiKey": "anything",
-        "model": "cheap"
-    },
-    {
-        "name": "\u2b50 Local \u2192 deepseek-local",
-        "vendor": "openai",
-        "url": "http://localhost:4000/v1",
-        "apiKey": "anything",
-        "model": "local"
-    },
-    {
-        "name": "\u2b50 Embedding \u2192 nomic-embed-text",
-        "vendor": "openai",
-        "url": "http://localhost:4000/v1",
-        "apiKey": "anything",
-        "model": "embedding"
+      "name": "LiteLLM-local",
+      "vendor": "customendpoint",
+      "apiKey": "${input:chat.lm.secret.-5ddf5cda}",
+      "apiType": "chat-completions",
+      "models": [
+        {
+          "id": "deepseek-v4-pro",
+          "name": "DeepSeek V4 Pro",
+          "url": "http://localhost:4000/v1/chat/completions",
+          "toolCalling": true,
+          "vision": false,
+          "maxInputTokens": 128000,
+          "maxOutputTokens": 16000
+        },
+        {
+          "id": "claude-sonnet",
+          "name": "Claude Sonnet 4.6",
+          "url": "http://localhost:4000/v1/chat/completions",
+          "toolCalling": true,
+          "vision": true,
+          "maxInputTokens": 200000,
+          "maxOutputTokens": 16000
+        },
+        {
+          "id": "claude-opus",
+          "name": "Claude Opus 4.8",
+          "url": "http://localhost:4000/v1/chat/completions",
+          "toolCalling": true,
+          "vision": true,
+          "maxInputTokens": 200000,
+          "maxOutputTokens": 16000
+        },
+        {
+          "id": "groq-llama",
+          "name": "Groq Llama 4 Maverick",
+          "url": "http://localhost:4000/v1/chat/completions",
+          "toolCalling": true,
+          "vision": false,
+          "maxInputTokens": 128000,
+          "maxOutputTokens": 8000
+        },
+        {
+          "id": "mistral-large",
+          "name": "Mistral Medium 3.5",
+          "url": "http://localhost:4000/v1/chat/completions",
+          "toolCalling": true,
+          "vision": true,
+          "maxInputTokens": 128000,
+          "maxOutputTokens": 16000
+        },
+        {
+          "id": "codestral",
+          "name": "Codestral 25.08",
+          "url": "http://localhost:4000/v1/chat/completions",
+          "toolCalling": true,
+          "vision": false,
+          "maxInputTokens": 256000,
+          "maxOutputTokens": 16000
+        },
+        {
+          "id": "kimi-latest",
+          "name": "Kimi K2.6",
+          "url": "http://localhost:4000/v1/chat/completions",
+          "toolCalling": true,
+          "vision": true,
+          "maxInputTokens": 128000,
+          "maxOutputTokens": 16000
+        },
+        {
+          "id": "deepseek-local",
+          "name": "DeepSeek V4 (local)",
+          "url": "http://localhost:4000/v1/chat/completions",
+          "toolCalling": true,
+          "vision": false,
+          "maxInputTokens": 128000,
+          "maxOutputTokens": 16000
+        },
+        {
+          "id": "qwen2.5-coder",
+          "name": "Qwen2.5 Coder (local)",
+          "url": "http://localhost:4000/v1/chat/completions",
+          "toolCalling": true,
+          "vision": false,
+          "maxInputTokens": 128000,
+          "maxOutputTokens": 16000
+        },
+        {
+          "id": "deepseek-v4-pro-cloud",
+          "name": "DeepSeek V4 Pro (cloud)",
+          "url": "http://localhost:4000/v1/chat/completions",
+          "toolCalling": true,
+          "vision": false,
+          "maxInputTokens": 128000,
+          "maxOutputTokens": 16000
+        },
+        {
+          "id": "deepseek-v4-flash-cloud",
+          "name": "DeepSeek V4 Flash (cloud)",
+          "url": "http://localhost:4000/v1/chat/completions",
+          "toolCalling": true,
+          "vision": false,
+          "maxInputTokens": 128000,
+          "maxOutputTokens": 16000
+        },
+        {
+          "id": "gemma4-31b-cloud",
+          "name": "Gemma 4 31B (cloud)",
+          "url": "http://localhost:4000/v1/chat/completions",
+          "toolCalling": true,
+          "vision": false,
+          "maxInputTokens": 128000,
+          "maxOutputTokens": 16000
+        },
+        {
+          "id": "gemini-3-flash-cloud",
+          "name": "Gemini 3 Flash (cloud)",
+          "url": "http://localhost:4000/v1/chat/completions",
+          "toolCalling": true,
+          "vision": true,
+          "maxInputTokens": 128000,
+          "maxOutputTokens": 16000
+        },
+        {
+          "id": "glm-5.1-cloud",
+          "name": "GLM 5.1 (cloud)",
+          "url": "http://localhost:4000/v1/chat/completions",
+          "toolCalling": true,
+          "vision": false,
+          "maxInputTokens": 128000,
+          "maxOutputTokens": 16000
+        },
+        {
+          "id": "kimi-k2.5-cloud",
+          "name": "Kimi K2.5 (cloud)",
+          "url": "http://localhost:4000/v1/chat/completions",
+          "toolCalling": true,
+          "vision": true,
+          "maxInputTokens": 128000,
+          "maxOutputTokens": 16000
+        },
+        {
+          "id": "kimi-k2.6-cloud",
+          "name": "Kimi K2.6 (cloud)",
+          "url": "http://localhost:4000/v1/chat/completions",
+          "toolCalling": true,
+          "vision": true,
+          "maxInputTokens": 128000,
+          "maxOutputTokens": 16000
+        },
+        {
+          "id": "minimax-m2.7-cloud",
+          "name": "MiniMax M2.7 (cloud)",
+          "url": "http://localhost:4000/v1/chat/completions",
+          "toolCalling": true,
+          "vision": true,
+          "maxInputTokens": 128000,
+          "maxOutputTokens": 16000
+        },
+        {
+          "id": "ministral-3-3b-cloud",
+          "name": "Ministral 3 3B (cloud)",
+          "url": "http://localhost:4000/v1/chat/completions",
+          "toolCalling": true,
+          "vision": false,
+          "maxInputTokens": 128000,
+          "maxOutputTokens": 16000
+        },
+        {
+          "id": "ministral-3-8b-cloud",
+          "name": "Ministral 3 8B (cloud)",
+          "url": "http://localhost:4000/v1/chat/completions",
+          "toolCalling": true,
+          "vision": false,
+          "maxInputTokens": 128000,
+          "maxOutputTokens": 16000
+        },
+        {
+          "id": "ministral-3-14b-cloud",
+          "name": "Ministral 3 14B (cloud)",
+          "url": "http://localhost:4000/v1/chat/completions",
+          "toolCalling": true,
+          "vision": false,
+          "maxInputTokens": 128000,
+          "maxOutputTokens": 16000
+        },
+        {
+          "id": "mistral-large-3-675b-cloud",
+          "name": "Mistral Large 3 675B (cloud)",
+          "url": "http://localhost:4000/v1/chat/completions",
+          "toolCalling": true,
+          "vision": true,
+          "maxInputTokens": 128000,
+          "maxOutputTokens": 16000
+        },
+        {
+          "id": "qwen3.5-397b-cloud",
+          "name": "Qwen 3.5 397B (cloud)",
+          "url": "http://localhost:4000/v1/chat/completions",
+          "toolCalling": true,
+          "vision": false,
+          "maxInputTokens": 128000,
+          "maxOutputTokens": 16000
+        },
+        {
+          "id": "qwen3-vl-235b-cloud",
+          "name": "Qwen3 VL 235B (cloud)",
+          "url": "http://localhost:4000/v1/chat/completions",
+          "toolCalling": true,
+          "vision": true,
+          "maxInputTokens": 128000,
+          "maxOutputTokens": 16000
+        },
+        {
+          "id": "qwen3-vl-235b-instruct-cloud",
+          "name": "Qwen3 VL 235B Instruct (cloud)",
+          "url": "http://localhost:4000/v1/chat/completions",
+          "toolCalling": true,
+          "vision": true,
+          "maxInputTokens": 128000,
+          "maxOutputTokens": 16000
+        },
+        {
+          "id": "nomic-embed-text",
+          "name": "Nomic Embed Text",
+          "url": "http://localhost:4000/v1/chat/completions",
+          "toolCalling": false,
+          "vision": false,
+          "maxInputTokens": 8192,
+          "maxOutputTokens": 1
+        },
+        {
+          "id": "fallback-deepseek",
+          "name": "Fallback Chain (DeepSeek \u2192 Claude \u2192 Groq)",
+          "url": "http://localhost:4000/v1/chat/completions",
+          "toolCalling": true,
+          "vision": false,
+          "maxInputTokens": 128000,
+          "maxOutputTokens": 16000
+        },
+        {
+          "id": "best-coding",
+          "name": "\u2b50 Best Coding \u2192 DeepSeek V4 Pro",
+          "url": "http://localhost:4000/v1/chat/completions",
+          "toolCalling": true,
+          "vision": false,
+          "maxInputTokens": 128000,
+          "maxOutputTokens": 16000
+        },
+        {
+          "id": "best-chat",
+          "name": "\u2b50 Best Chat \u2192 Claude Sonnet 4.6",
+          "url": "http://localhost:4000/v1/chat/completions",
+          "toolCalling": true,
+          "vision": true,
+          "maxInputTokens": 200000,
+          "maxOutputTokens": 16000
+        },
+        {
+          "id": "fast",
+          "name": "\u2b50 Fast \u2192 Groq Llama 4 Maverick",
+          "url": "http://localhost:4000/v1/chat/completions",
+          "toolCalling": true,
+          "vision": false,
+          "maxInputTokens": 128000,
+          "maxOutputTokens": 8000
+        },
+        {
+          "id": "cheap",
+          "name": "\u2b50 Cheap \u2192 DeepSeek V4 Flash (cloud)",
+          "url": "http://localhost:4000/v1/chat/completions",
+          "toolCalling": true,
+          "vision": false,
+          "maxInputTokens": 128000,
+          "maxOutputTokens": 16000
+        },
+        {
+          "id": "local",
+          "name": "\u2b50 Local \u2192 DeepSeek V4 (local)",
+          "url": "http://localhost:4000/v1/chat/completions",
+          "toolCalling": true,
+          "vision": false,
+          "maxInputTokens": 128000,
+          "maxOutputTokens": 16000
+        },
+        {
+          "id": "embedding",
+          "name": "\u2b50 Embedding \u2192 Nomic Embed Text",
+          "url": "http://localhost:4000/v1/chat/completions",
+          "toolCalling": false,
+          "vision": false,
+          "maxInputTokens": 8192,
+          "maxOutputTokens": 1
+        }
+      ]
     }
   ]
 }

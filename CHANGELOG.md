@@ -7,8 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- **VS Code settings format** — switched from flat `openai`-vendor entries to a single `customendpoint` entry with a `models` array. Each model now includes `toolCalling`, `vision`, `maxInputTokens`, and `maxOutputTokens` capabilities. Aliases inherit their target model's capabilities.
+- **Generator script** (`scripts/generate_vscode_settings.py`) — completely rewritten `generate_settings()` and `write_settings()` to produce the new `customendpoint` format. Added `_model_capabilities()` and `_friendly_name()` helper functions.
+
 ### Added
-- VS Code settings generator (`scripts/generate_vscode_settings.py`) now parses `model_alias` from `config.yaml` and includes all 6 aliases as active (uncommented) entries in `.vscode/settings.json`, alongside the first model
+- VS Code settings generator (`scripts/generate_vscode_settings.py`) now parses `model_alias` from `config.yaml` and includes all 6 aliases as active entries in `.vscode/settings.json`, alongside the first model
 - Request caching layer (`cache-proxy.py`) — SQLite-backed caching proxy that sits between clients and LiteLLM. Caches identical chat completion requests to avoid repeated API calls. Supports `--port`, `--backend`, `--ttl`, `--clear`, `--stats`. Enabled via `LITELLM_CACHE=true` env var or `--cache` flag on `litellm-local start`
 - Makefile targets: `cache-stats`, `cache-clear`
 - `cache-proxy.py` added to CI Python syntax check
