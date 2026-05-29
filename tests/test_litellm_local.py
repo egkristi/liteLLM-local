@@ -163,6 +163,20 @@ class TestCommandHandlers(unittest.TestCase):
         _, kwargs = self.mock_call.call_args
         self.assertEqual(kwargs['env']['WEBUI_PORT'], '9090')
 
+    def test_cmd_start_with_json_logs(self):
+        """Test cmd_start passes LITELLM_JSON_LOGS env var when --json is set."""
+        self.mock_args.json_logs = True
+        litellm_local.cmd_start(self.mock_args)
+        _, kwargs = self.mock_call.call_args
+        self.assertEqual(kwargs['env']['LITELLM_JSON_LOGS'], 'true')
+
+    def test_cmd_start_without_json_logs(self):
+        """Test cmd_start does not set LITELLM_JSON_LOGS when --json is not set."""
+        self.mock_args.json_logs = False
+        litellm_local.cmd_start(self.mock_args)
+        _, kwargs = self.mock_call.call_args
+        self.assertNotIn('LITELLM_JSON_LOGS', kwargs['env'])
+
 
 class TestPortEnvVar(unittest.TestCase):
     """Test PORT environment variable handling."""

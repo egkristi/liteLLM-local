@@ -152,3 +152,14 @@ litellm_settings:
   set_verbose: false
   spend_logs: true         # enable usage / cost tracking (ISSUE-6)
   log_file: logs/litellm.log # persistent log file (ISSUE-5)
+
+  # Model aliases — use these names in your client to always get the best model
+  # for a given task, without needing to update VS Code settings when switching.
+  # Usage: set model="best-coding" in your client
+  model_alias:
+    best-coding: deepseek-v4-pro
+    best-chat: claude-sonnet
+    fast: groq-llama
+    cheap: deepseek-v4-flash-cloud
+    local: deepseek-local
+    embedding: nomic-embed-text

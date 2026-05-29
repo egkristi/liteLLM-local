@@ -37,3 +37,9 @@ install-autostart: ## Install launchd plist to auto-start proxy on login
 
 vscode-config: ## Regenerate .vscode/settings.json from config.yaml
 	@python3 scripts/generate_vscode_settings.py
+
+audit: ## Check .env against .env.example for missing/placeholder keys
+	@./audit.sh
+
+rotate-key: ## Rotate an API key (PROVIDER=deepseek make rotate-key)
+	@./rotate-key.sh $(PROVIDER)

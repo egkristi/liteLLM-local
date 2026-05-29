@@ -20,12 +20,12 @@
 - [ ] Per-user virtual keys with monthly spend caps — so family members each get a key with a budget limit (e.g. $5/month), preventing one heavy session from eating the shared budget
 - [ ] Cost alerts via macOS notification (`osascript`) when monthly spend crosses a configurable threshold
 - [ ] Export daily spend to `spend.csv` (model, tokens, cost) for analysis in Excel/Numbers
-- [ ] Model aliases (`best-coding`, `best-chat`, `fast`) in `config.yaml` — VS Code config never needs to change when switching preferred models
 - [ ] Model benchmarking script (`benchmark.sh`) — sends a standard set of coding prompts to each model and reports latency + cost
-- [ ] `make rotate-key PROVIDER=deepseek` — prompts for new key, updates `.env`, restarts proxy
-- [ ] `make audit` — checks `.env` against `.env.example`, warns about missing or placeholder keys
-- [ ] Structured JSON logging (`json_logs: true`) to enable `jq`-based filtering and log tool ingestion
-- [ ] Log rotation — keep last 7 days, compress older files
+- [ ] Shell completions (bash/zsh) for `./litellm-local` — model names and flags tab-complete
+- [ ] `docs/PROVIDERS.md` — reference for all providers: where to get a key, LiteLLM model string, current pricing
+- [ ] `docs/TROUBLESHOOTING.md` — document known issues: DeepSeek `reasoning_content` fix, Ollama cloud vs local, VS Code 402 errors, rate limit handling
+- [ ] `docs/FAMILY_SETUP.md` — guide for adding a family member: virtual key with budget cap, VS Code setup, which models to use for what
+- [ ] Uptime monitor — cron ping every 5 minutes, macOS notification if proxy is unexpectedly down
 
 ## Later
 
@@ -55,3 +55,11 @@
 - [x] Add web UI (`webui.py`)
 - [x] Add `test.sh` smoke-test script
 - [x] Rewrite README with quick-start and commands table
+- [x] Add `make validate` — checks all `.env` keys are set and all models in `config.yaml` are reachable before starting
+- [x] Add `make install-autostart` — generates and loads the correct launchd plist with the actual repo path
+- [x] Add `make vscode-config` — regenerates `.vscode/settings.json` from `config.yaml` so the two never drift out of sync
+- [x] Add `make audit` — checks `.env` against `.env.example`, warns about missing or placeholder keys
+- [x] Add `make rotate-key PROVIDER=deepseek` — prompts for new key, updates `.env`, restarts proxy
+- [x] Structured JSON logging (`json_logs: true`) to enable `jq`-based filtering and log tool ingestion
+- [x] Log rotation — keep last 7 days, compress older files
+- [x] Model aliases (`best-coding`, `best-chat`, `fast`) in `config.yaml` — VS Code config never needs to change when switching preferred models

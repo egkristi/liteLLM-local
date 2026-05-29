@@ -48,6 +48,10 @@ fi
 
 mkdir -p logs
 
+# --- Log rotation: keep last 7 days, compress older files ---
+find logs/ -name "litellm-*.log" -mtime +7 -exec gzip {} \; 2>/dev/null || true
+find logs/ -name "litellm-*.log.gz" -mtime +30 -delete 2>/dev/null || true
+
 # --- Config reload / watch mode ---
 RELOAD_FLAG=""
 if [ "${LITELLM_RELOAD:-}" = "true" ]; then
@@ -55,4 +59,11 @@ if [ "${LITELLM_RELOAD:-}" = "true" ]; then
   echo "Config reload enabled (watches $CONFIG for changes)"
 fi
 
-exec uv tool run litellm --config "$CONFIG" --port "$PORT" $RELOAD_FLAG 2>&1 | tee "logs/litellm-$(date +%Y%m%d-%H%M%S).log"
+# --- JSON logging ---
+JSON_FLAG=""
+if [ "${LITELLM_JSON_LOGS:-}" = "true" ]; then
+  JSON_FLAG="--json"
+  echo "JSON logging enabled"
+fi
+
+exec uv tool run litellm --config "$CONFIG" --port "$PORT" $RELOAD_FLAG $JSON_FLAG 2>&1 | tee "logs/litellm-$(date +%Y%m%d-%H%M%S).log"

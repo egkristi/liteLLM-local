@@ -52,6 +52,21 @@ echo ""
 mkdir -p "$LOG_DIR"
 mkdir -p "$(dirname "$PLIST_PATH")"
 
+# Read .env file and build environment variables dict for launchd
+ENV_DICT=""
+if [ -f "$REPO_PATH/.env" ]; then
+  while IFS='=' read -r key value || [ -n "$key" ]; do
+    # Skip comments and blank lines
+    [[ "$key" =~ ^#.*$ || -z "$key" ]] && continue
+    # Strip quotes from value
+    value="${value%\"}"
+    value="${value#\"}"
+    ENV_DICT="${ENV_DICT}        <key>${key}</key>
+        <string>${value}</string>
+"
+  done < "$REPO_PATH/.env"
+fi
+
 cat > "$PLIST_PATH" << PLIST
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
@@ -81,7 +96,7 @@ cat > "$PLIST_PATH" << PLIST
         <string>${PATH}</string>
         <key>HOME</key>
         <string>${HOME}</string>
-    </dict>
+${ENV_DICT}    </dict>
 
     <key>StandardOutPath</key>
     <string>${LOG_DIR}/launchd-stdout.log</string>

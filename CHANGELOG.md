@@ -8,6 +8,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- `make audit` target (`audit.sh`) — checks `.env` against `.env.example` for missing keys, placeholder values, and extra keys
+- `make rotate-key` target (`rotate-key.sh`) — prompts for a new API key, updates `.env`, and restarts the proxy
+- Structured JSON logging — `--json` flag on `litellm-local start` / `LITELLM_JSON_LOGS=true` env var enables LiteLLM's JSON log output
+- Log rotation in `start.sh` — compresses logs older than 7 days with gzip, deletes compressed logs older than 30 days
+- Model aliases in `config.yaml` and `config.prod.yaml` — `best-coding`, `best-chat`, `fast`, `cheap`, `local`, `embedding` aliases so VS Code config never needs to change when switching preferred models
+- `scripts/generate_vscode_settings.py` added to CI Python syntax check
+- `audit.sh` and `rotate-key.sh` added to CI shellcheck
+- 2 new unit tests for `--json` flag (20 total, all passing)
 - GitHub Actions CI workflow (`.github/workflows/ci.yml`) — lints shell scripts with shellcheck, validates YAML with yamllint, checks Python syntax, verifies config env var consistency
 - `.yamllint` config matching project 2-space YAML style
 - Unit tests for `litellm-local` wrapper (`tests/test_litellm_local.py`) — 18 tests covering arg parsing, command dispatch, PORT env var, and subprocess calls

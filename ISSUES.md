@@ -6,6 +6,9 @@
 
 ## Closed
 
+### ISSUE-19: `install-autostart.sh` plist doesn't source `.env` — proxy started by launchd has no API keys ✅
+Fixed by reading `.env` file and injecting each variable into the launchd plist's `EnvironmentVariables` dict.
+
 ### ISSUE-18: `config.prod.yaml` references `LITELLM_MASTER_KEY` but `.env.example` doesn't have it ✅
 Added `LITELLM_MASTER_KEY` to `.env.example`. Updated CI workflow to check all config files (not just `config.yaml`) for env var consistency.
 
