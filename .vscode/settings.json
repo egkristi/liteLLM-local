@@ -1,0 +1,20 @@
+{
+  "github.copilot.chat.languageModels": [
+    {
+      "name": "LiteLLM Local",
+      "vendor": "openai",
+      "url": "http://localhost:4000/v1",
+      "apiKey": "anything",
+      "model": "deepseek-v4-pro"
+    }
+    // Uncomment the model you want to use:
+    // { "name": "LiteLLM Claude", "vendor": "openai", "url": "http://localhost:4000/v1", "apiKey": "anything", "model": "claude-sonnet" },
+    // { "name": "LiteLLM Opus", "vendor": "openai", "url": "http://localhost:4000/v1", "apiKey": "anything", "model": "claude-opus" },
+    // { "name": "LiteLLM Groq", "vendor": "openai", "url": "http://localhost:4000/v1", "apiKey": "anything", "model": "groq-llama" },
+    // { "name": "LiteLLM Mistral", "vendor": "openai", "url": "http://localhost:4000/v1", "apiKey": "anything", "model": "mistral-large" },
+    // { "name": "LiteLLM Codestral", "vendor": "openai", "url": "http://localhost:4000/v1", "apiKey": "anything", "model": "codestral" },
+    // { "name": "LiteLLM Kimi", "vendor": "openai", "url": "http://localhost:4000/v1", "apiKey": "anything", "model": "kimi-latest" },
+    // { "name": "LiteLLM Local", "vendor": "openai", "url": "http://localhost:4000/v1", "apiKey": "anything", "model": "deepseek-local" },
+    // { "name": "LiteLLM Fallback", "vendor": "openai", "url": "http://localhost:4000/v1", "apiKey": "anything", "model": "fallback-deepseek" }
+  ]
+}
