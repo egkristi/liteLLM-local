@@ -25,7 +25,9 @@ PROXY_PORT = os.environ.get("PORT", "4000")
 WEBUI_PORT = int(os.environ.get("WEBUI_PORT", "8080"))
 
 
-def _proxy_json(path: str) -> dict | list | None:
+from typing import Optional, Union
+
+def _proxy_json(path: str) -> Union[dict, list, None]:
     """Fetch JSON from the LiteLLM proxy using urllib (no curl dependency)."""
     try:
         url = f"http://localhost:{PROXY_PORT}{path}"
