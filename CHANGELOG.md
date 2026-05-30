@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+- **Model aliases (`best-coding`, `best-chat`, etc.) now work** — replaced `model_alias_map` (not a valid LiteLLM config key, silently ignored) with proper `model_list` entries. Aliases are now registered with the proxy and accepted by `/chat/completions`. (ISSUE-20)
+- **`config.prod.yaml`** — removed stale `model_alias` section that was also ignored by the proxy
+- **`scripts/generate_vscode_settings.py`** — removed stale `model_alias` parsing logic; aliases are now parsed from `model_list` like all other models
+
 ### Changed
 - **VS Code settings format** — switched from flat `openai`-vendor entries to a single `customendpoint` entry with a `models` array. Each model now includes `toolCalling`, `vision`, `maxInputTokens`, and `maxOutputTokens` capabilities. Aliases inherit their target model's capabilities.
 - **Generator script** (`scripts/generate_vscode_settings.py`) — completely rewritten `generate_settings()` and `write_settings()` to produce the new `customendpoint` format. Added `_model_capabilities()` and `_friendly_name()` helper functions.

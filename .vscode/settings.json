@@ -254,8 +254,8 @@
           "name": "\u2b50 Best Chat \u2192 Claude Sonnet 4.6",
           "url": "http://localhost:4000/v1/chat/completions",
           "toolCalling": true,
-          "vision": true,
-          "maxInputTokens": 200000,
+          "vision": false,
+          "maxInputTokens": 128000,
           "maxOutputTokens": 16000
         },
         {
@@ -265,7 +265,7 @@
           "toolCalling": true,
           "vision": false,
           "maxInputTokens": 128000,
-          "maxOutputTokens": 8000
+          "maxOutputTokens": 16000
         },
         {
           "id": "cheap",
@@ -289,10 +289,10 @@
           "id": "embedding",
           "name": "\u2b50 Embedding \u2192 Nomic Embed Text",
           "url": "http://localhost:4000/v1/chat/completions",
-          "toolCalling": false,
+          "toolCalling": true,
           "vision": false,
-          "maxInputTokens": 8192,
-          "maxOutputTokens": 1
+          "maxInputTokens": 128000,
+          "maxOutputTokens": 16000
         }
       ]
     }

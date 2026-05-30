@@ -147,19 +147,41 @@ model_list:
           model: groq/llama-3.3-70b-versatile
           api_key: os.environ/GROQ_API_KEY
 
+  # Model aliases — convenience names that route to the best model for each task.
+  # These are registered as proper model_list entries so the proxy recognizes them.
+  # Usage: set model="best-coding" in your client
+  - model_name: best-coding
+    litellm_params:
+      model: deepseek/deepseek-chat
+      api_key: os.environ/DEEPSEEK_API_KEY
+
+  - model_name: best-chat
+    litellm_params:
+      model: anthropic/claude-sonnet-4-6
+      api_key: os.environ/ANTHROPIC_API_KEY
+
+  - model_name: fast
+    litellm_params:
+      model: groq/llama-3.3-70b-versatile
+      api_key: os.environ/GROQ_API_KEY
+
+  - model_name: cheap
+    litellm_params:
+      model: ollama/deepseek-v4-flash:cloud
+      api_base: http://localhost:11434
+
+  - model_name: local
+    litellm_params:
+      model: ollama/deepseek-v4-pro:cloud
+      api_base: http://localhost:11434
+
+  - model_name: embedding
+    litellm_params:
+      model: ollama/nomic-embed-text:latest
+      api_base: http://localhost:11434
+
 litellm_settings:
   drop_params: true        # strips unsupported params (fixes DeepSeek reasoning_content issue)
   set_verbose: false
   spend_logs: true         # enable usage / cost tracking (ISSUE-6)
   log_file: logs/litellm.log # persistent log file (ISSUE-5)
-
-  # Model aliases — use these names in your client to always get the best model
-  # for a given task, without needing to update VS Code settings when switching.
-  # Usage: set model="best-coding" in your client
-  model_alias:
-    best-coding: deepseek-v4-pro
-    best-chat: claude-sonnet
-    fast: groq-llama
-    cheap: deepseek-v4-flash-cloud
-    local: deepseek-local
-    embedding: nomic-embed-text

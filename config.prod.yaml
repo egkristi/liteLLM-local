@@ -75,14 +75,6 @@ litellm_settings:
   spend_logs: true
   log_file: logs/litellm.log
 
-  # Model aliases
-  model_alias:
-    best-coding: deepseek-v4-pro
-    best-chat: claude-sonnet
-    fast: groq-llama
-    cheap: deepseek-v4-flash-cloud
-    local: deepseek-local
-
 general_settings:
   # Production: require API key for all requests
   master_key: os.environ/LITELLM_MASTER_KEY

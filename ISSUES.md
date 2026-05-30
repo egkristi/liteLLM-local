@@ -6,6 +6,9 @@
 
 ## Closed
 
+### ISSUE-20: `model_alias_map` in `config.yaml` is not a valid LiteLLM config key — aliases like `best-coding` are rejected by the proxy ✅
+`model_alias_map` is not a recognized LiteLLM configuration key. The proxy ignores it entirely, so any client sending `model=best-coding` gets a 400 error. Fixed by registering aliases as proper `model_list` entries that point to the same underlying models.
+
 ### ISSUE-19: `install-autostart.sh` plist doesn't source `.env` — proxy started by launchd has no API keys ✅
 Fixed by reading `.env` file and injecting each variable into the launchd plist's `EnvironmentVariables` dict.
 

@@ -20,7 +20,7 @@ VSCODE_SETTINGS_PATH = PROJECT_ROOT / ".vscode" / "settings.json"
 
 
 def parse_config(config_path: Path):
-    """Parse model_list and model_alias from config.yaml and return list of model entries."""
+    """Parse model_list from config.yaml and return list of model entries."""
     if not config_path.exists():
         print(f"Error: {config_path} not found")
         sys.exit(1)
@@ -53,20 +53,6 @@ def parse_config(config_path: Path):
             "name": name,
             "display": f"LiteLLM {display_name}",
         })
-
-    # Parse model aliases from litellm_settings
-    alias_section = re.search(r'model_alias:\n((?:    [\w-]+:.*\n?)*)', content)
-    if alias_section:
-        alias_pattern = r'    ([\w-]+):\s+(\S+)'
-        for alias_match in re.finditer(alias_pattern, alias_section.group(1)):
-            alias_name = alias_match.group(1)
-            target_model = alias_match.group(2)
-            display_name = alias_name.replace('-', ' ').title()
-            model_entries.append({
-                "name": alias_name,
-                "display": f"⭐ {display_name} → {target_model}",
-                "is_alias": True,
-            })
 
     return model_entries
 
@@ -135,6 +121,12 @@ def _friendly_name(name: str) -> str:
         "qwen3-vl-235b-instruct-cloud": "Qwen3 VL 235B Instruct (cloud)",
         "nomic-embed-text": "Nomic Embed Text",
         "fallback-deepseek": "Fallback Chain (DeepSeek → Claude → Groq)",
+        "best-coding": "⭐ Best Coding → DeepSeek V4 Pro",
+        "best-chat": "⭐ Best Chat → Claude Sonnet 4.6",
+        "fast": "⭐ Fast → Groq Llama 4 Maverick",
+        "cheap": "⭐ Cheap → DeepSeek V4 Flash (cloud)",
+        "local": "⭐ Local → DeepSeek V4 (local)",
+        "embedding": "⭐ Embedding → Nomic Embed Text",
     }
     return names.get(name, name.replace('-', ' ').title())
 
@@ -147,14 +139,6 @@ def generate_settings(model_entries):
         name = entry["name"]
         caps = _model_capabilities(name, "")
         friendly = _friendly_name(name)
-
-        if entry.get("is_alias"):
-            # Map alias to target model for capabilities
-            target = entry["display"].split("→ ")[-1] if "→" in entry["display"] else name
-            target_friendly = _friendly_name(target)
-            friendly = f"⭐ {entry['display'].split('→')[0].replace('⭐', '').strip()} → {target_friendly}"
-            # Use target model's capabilities
-            caps = _model_capabilities(target, "")
 
         model_obj = {
             "id": name,
