@@ -64,13 +64,22 @@ A local LiteLLM proxy providing a single OpenAI-compatible endpoint for multiple
 
 Use subagents (`runSubagent` tool) aggressively to parallelize work, improve quality, reduce cost, and produce better solutions. Subagents are the **primary mechanism for efficiency** in this project.
 
+### Why subagents?
+
+Subagents are **context-isolated** — they run independently from your main session. Only the final result flows back; intermediate exploration stays contained, keeping your primary context clean and focused. This means:
+
+- **Less clutter** — no tool-call noise from searches and reads polluting the main conversation
+- **Sharper focus** — each subagent concentrates on one task without distraction
+- **True parallelism** — VS Code can run multiple subagents simultaneously, cutting total time
+- **Cost efficiency** — subagents use their own context windows, saving premium requests
+
 ### Core principle: right model for the job
 
-Subagents can use **different models** than the primary agent. Choose the model that best fits each task:
+Subagents can use **different models** than the primary agent. Choose the model that best fits each task. Use **currently available, capable, and cost-effective models** — prefer what's accessible in your environment over hypothetical best-in-class. A model you can use today beats one you can't.
 
-| Task type | Recommended model | Why |
-|-----------|-------------------|-----|
-| **Research & exploration** — codebase search, file reading, tracing call chains | Fast/cheap model (e.g., GPT-4o mini, Claude Haiku) | Read-heavy, minimal reasoning needed |
+| Task type | Recommended tier | Why |
+|-----------|------------------|-----|
+| **Research & exploration** — codebase search, file reading, tracing call chains | Fast/cheap model (e.g., GPT-4o mini, Claude Haiku, Gemini Flash) | Read-heavy, minimal reasoning needed |
 | **Quality assurance** — reviewing architecture, design, edge cases | Strong reasoning model (e.g., Claude Sonnet, GPT-4o, DeepSeek) | Needs deep understanding of trade-offs |
 | **Documentation updates** — CHANGELOG, README, ROADMAP, docs/ | Fast/cheap model | Simple text generation, no code execution |
 | **Code generation** — writing implementation code | Strong coding model (e.g., Claude Sonnet, DeepSeek Coder) | Needs to produce correct, idiomatic code |
@@ -78,7 +87,7 @@ Subagents can use **different models** than the primary agent. Choose the model 
 | **Architecture decisions** — design patterns, trade-off analysis | Strongest reasoning model | High-stakes, many constraints |
 | **Simple grep/search** — finding strings, reading files | Fastest/cheapest model | Trivial pattern matching |
 
-**Always specify the `model` parameter** when launching a subagent to ensure the right capabilities for the task. Don't waste a strong model on a simple search, and don't trust a weak model with architecture decisions.
+**Always specify the `model` parameter** when launching a subagent. Pick from what's currently available and cost-effective — don't chase hypothetical ideal models. A fast/cheap model that runs now is better than a perfect model that isn't accessible. Don't waste a strong model on a simple search, and don't trust a weak model with architecture decisions.
 
 ### When to use subagents
 
@@ -116,21 +125,61 @@ RunSubagent(Explore, model="GPT-4o mini (copilot)"):
 
 ### Subagent patterns for common tasks
 
-**Pattern 1: Research → Implement → QA → Document**
+**Pattern 1: Research → Implement → QA → Document (handoff workflow)**
 1. **Research** (subagent, fast model): Explore codebase, find relevant files, recommend approach
 2. **Implement** (main agent): Write the code changes
 3. **QA** (subagent, strong model): Review the implementation for bugs, edge cases, style issues
 4. **Document** (subagent, fast model): Update CHANGELOG, docs, ROADMAP in parallel
 
+This is a classic handoff chain — each stage passes results to the next, keeping context clean at every step.
+
 **Pattern 2: Parallel exploration with right models**
 ```
-# Launch multiple subagents simultaneously, each with appropriate model
+# Launch multiple subagents SIMULTANEOUSLY — each with appropriate model
 RunSubagent(Explore, model="GPT-4o mini (copilot)"): "Find all shell scripts with 'local' keyword issues"
 RunSubagent(Explore, model="GPT-4o mini (copilot)"): "Find all Python files with Union type hints vs | syntax"
 RunSubagent(Explore, model="Claude Sonnet (copilot)"): "Review config.yaml architecture — are fallback chains optimal?"
 ```
 
-**Pattern 3: Cost-aware batching**
+All three run in parallel. Results come back independently, no serial waiting.
+
+**Pattern 3: Specialized custom agents for complex workflows**
+For multi-phase features, define specialized subagent roles:
+
+| Agent role | Behavior | Model | Tools |
+|------------|----------|-------|-------|
+| **Researcher** | Read-only exploration, web search | Fast/cheap | read_file, grep, semantic_search, fetch_webpage |
+| **Implementer** | Full editing capabilities | Strong coding | read_file, replace_string, create_file |
+| **Reviewer** | Architecture & security audit | Strong reasoning | read_file, grep, vscode_listCodeUsages |
+| **Documenter** | CHANGELOG, README, docs updates | Fast/cheap | read_file, replace_string, create_file |
+
+```markdown
+# Example: Custom agent workflow for a new feature
+# Phase 1 — Research (parallel)
+RunSubagent(Explore, model="GPT-4o mini (copilot)"):
+  "Research authentication patterns in this project. Check ISSUES.md,
+   ROADMAP.md, and existing config files. Return: recommended approach."
+
+RunSubagent(Explore, model="GPT-4o mini (copilot)"):
+  "Find all files related to the config system — config.yaml, .env.example,
+   start.sh parsing logic. Return: file list and key functions."
+
+# Phase 2 — Implement (main agent, after research results are in)
+# ... write the code ...
+
+# Phase 3 — QA (strong model)
+RunSubagent(Explore, model="Claude Sonnet (copilot)"):
+  "Review the implementation for security issues, edge cases, and
+   consistency with project conventions. Return: findings."
+
+# Phase 4 — Document (parallel, fast model)
+RunSubagent(Explore, model="GPT-4o mini (copilot)"):
+  "Update CHANGELOG.md under [Unreleased] with the changes."
+RunSubagent(Explore, model="GPT-4o mini (copilot)"):
+  "Update ROADMAP.md — mark the completed item as [x]."
+```
+
+**Pattern 4: Cost-aware batching**
 - Group small, independent fixes into a single subagent task with a fast/cheap model
 - Use subagents for read-only exploration (no token waste on tool calls)
 - Reserve strong/expensive models for architecture review, security audit, and complex code generation
