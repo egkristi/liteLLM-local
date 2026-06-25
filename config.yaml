@@ -96,6 +96,11 @@ model_list:
       model: ollama/minimax-m2.7:cloud
       api_base: http://localhost:11434
 
+  - model_name: minimax-m3-cloud
+    litellm_params:
+      model: ollama/minimax-m3:cloud
+      api_base: http://localhost:11434
+
   - model_name: ministral-3-3b-cloud
     litellm_params:
       model: ollama/ministral-3:3b-cloud
