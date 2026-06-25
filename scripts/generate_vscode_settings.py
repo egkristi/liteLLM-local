@@ -109,6 +109,7 @@ def _friendly_name(name: str) -> str:
         "gemma4-31b-cloud": "Gemma 4 31B (cloud)",
         "gemini-3-flash-cloud": "Gemini 3 Flash (cloud)",
         "glm-5.1-cloud": "GLM 5.1 (cloud)",
+        "glm-5.2-cloud": "GLM 5.2 (cloud)",
         "kimi-k2.5-cloud": "Kimi K2.5 (cloud)",
         "kimi-k2.6-cloud": "Kimi K2.6 (cloud)",
         "kimi-k2.7-code-cloud": "Kimi K2.7 Code (cloud)",

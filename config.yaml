@@ -76,6 +76,11 @@ model_list:
       model: ollama/glm-5.1:cloud
       api_base: http://localhost:11434
 
+  - model_name: glm-5.2-cloud
+    litellm_params:
+      model: ollama/glm-5.2:cloud
+      api_base: http://localhost:11434
+
   - model_name: kimi-k2.5-cloud
     litellm_params:
       model: ollama/kimi-k2.5:cloud

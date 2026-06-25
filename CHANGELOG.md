@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- New Ollama cloud model: `glm-5.2-cloud` (GLM 5.2) — added to `config.yaml`, VS Code settings, and generator script
 - New Ollama cloud model: `minimax-m3-cloud` (MiniMax M3) — added to `config.yaml`, VS Code settings, and generator script
 - New Ollama cloud model: `kimi-k2.7-code-cloud` (Kimi K2.7 Code) — added to `config.yaml`, VS Code settings, and generator script
 
