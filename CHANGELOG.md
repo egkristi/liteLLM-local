@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- New DeepSeek cloud model: `deepseek-r1` (DeepSeek R1) — added to `config.yaml`, VS Code settings, and generator script
 - New DeepSeek cloud model: `deepseek-v4-flash` (DeepSeek V4 Flash) — added to `config.yaml`, VS Code settings, and generator script
 - New Ollama cloud model: `glm-5.2-cloud` (GLM 5.2) — added to `config.yaml`, VS Code settings, and generator script
 - New Ollama cloud model: `minimax-m3-cloud` (MiniMax M3) — added to `config.yaml`, VS Code settings, and generator script

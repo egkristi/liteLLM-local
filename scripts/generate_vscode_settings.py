@@ -97,6 +97,7 @@ def _friendly_name(name: str) -> str:
     names = {
         "deepseek-v4-pro": "DeepSeek V4 Pro",
         "deepseek-v4-flash": "DeepSeek V4 Flash",
+        "deepseek-r1": "DeepSeek R1",
         "claude-sonnet": "Claude Sonnet 4.6",
         "claude-opus": "Claude Opus 4.8",
         "groq-llama": "Groq Llama 4 Maverick",
