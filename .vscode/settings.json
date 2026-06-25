@@ -151,6 +151,15 @@
           "maxOutputTokens": 16000
         },
         {
+          "id": "kimi-k2.7-code-cloud",
+          "name": "Kimi K2.7 Code (cloud)",
+          "url": "http://localhost:4000/v1/chat/completions",
+          "toolCalling": true,
+          "vision": true,
+          "maxInputTokens": 128000,
+          "maxOutputTokens": 16000
+        },
+        {
           "id": "minimax-m2.7-cloud",
           "name": "MiniMax M2.7 (cloud)",
           "url": "http://localhost:4000/v1/chat/completions",

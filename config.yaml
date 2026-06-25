@@ -86,6 +86,11 @@ model_list:
       model: ollama/kimi-k2.6:cloud
       api_base: http://localhost:11434
 
+  - model_name: kimi-k2.7-code-cloud
+    litellm_params:
+      model: ollama/kimi-k2.7-code:cloud
+      api_base: http://localhost:11434
+
   - model_name: minimax-m2.7-cloud
     litellm_params:
       model: ollama/minimax-m2.7:cloud

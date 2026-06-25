@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- New Ollama cloud model: `kimi-k2.7-code-cloud` (Kimi K2.7 Code) — added to `config.yaml`, VS Code settings, and generator script
+
 ### Fixed
 - **Model aliases (`best-coding`, `best-chat`, etc.) now work** — replaced `model_alias_map` (not a valid LiteLLM config key, silently ignored) with proper `model_list` entries. Aliases are now registered with the proxy and accepted by `/chat/completions`. (ISSUE-20)
 - **`config.prod.yaml`** — removed stale `model_alias` section that was also ignored by the proxy

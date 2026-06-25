@@ -111,6 +111,7 @@ def _friendly_name(name: str) -> str:
         "glm-5.1-cloud": "GLM 5.1 (cloud)",
         "kimi-k2.5-cloud": "Kimi K2.5 (cloud)",
         "kimi-k2.6-cloud": "Kimi K2.6 (cloud)",
+        "kimi-k2.7-code-cloud": "Kimi K2.7 Code (cloud)",
         "minimax-m2.7-cloud": "MiniMax M2.7 (cloud)",
         "ministral-3-3b-cloud": "Ministral 3 3B (cloud)",
         "ministral-3-8b-cloud": "Ministral 3 8B (cloud)",
