@@ -16,6 +16,15 @@
           "maxOutputTokens": 16000
         },
         {
+          "id": "deepseek-v4-flash",
+          "name": "DeepSeek V4 Flash",
+          "url": "http://localhost:4000/v1/chat/completions",
+          "toolCalling": true,
+          "vision": false,
+          "maxInputTokens": 128000,
+          "maxOutputTokens": 16000
+        },
+        {
           "id": "claude-sonnet",
           "name": "Claude Sonnet 4.6",
           "url": "http://localhost:4000/v1/chat/completions",

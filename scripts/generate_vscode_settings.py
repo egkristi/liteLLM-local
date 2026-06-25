@@ -96,6 +96,7 @@ def _friendly_name(name: str) -> str:
     """Map model IDs to friendly display names."""
     names = {
         "deepseek-v4-pro": "DeepSeek V4 Pro",
+        "deepseek-v4-flash": "DeepSeek V4 Flash",
         "claude-sonnet": "Claude Sonnet 4.6",
         "claude-opus": "Claude Opus 4.8",
         "groq-llama": "Groq Llama 4 Maverick",
