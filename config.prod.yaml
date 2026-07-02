@@ -59,6 +59,11 @@ model_list:
     litellm_params:
       model: deepseek/deepseek-chat
       api_key: os.environ/DEEPSEEK_API_KEY
+    model_info:
+      mode: chat
+      max_tokens: 65536
+      input_cost_per_token: 0.00000014
+      output_cost_per_token: 0.00000028
     fallback:
       - model_name: claude-sonnet
         litellm_params:
@@ -68,6 +73,58 @@ model_list:
         litellm_params:
           model: groq/llama-3.3-70b-versatile
           api_key: os.environ/GROQ_API_KEY
+
+  # Model aliases — convenience names that route to the best model for each task.
+  # Usage: set model="best-coding" in your client
+  - model_name: best-coding
+    litellm_params:
+      model: deepseek/deepseek-chat
+      api_key: os.environ/DEEPSEEK_API_KEY
+    model_info:
+      mode: chat
+      max_tokens: 65536
+      input_cost_per_token: 0.00000014
+      output_cost_per_token: 0.00000028
+
+  - model_name: best-chat
+    litellm_params:
+      model: anthropic/claude-sonnet-4-6
+      api_key: os.environ/ANTHROPIC_API_KEY
+    model_info:
+      mode: chat
+      max_tokens: 200000
+      input_cost_per_token: 0.000003
+      output_cost_per_token: 0.000015
+
+  - model_name: fast
+    litellm_params:
+      model: groq/llama-3.3-70b-versatile
+      api_key: os.environ/GROQ_API_KEY
+    model_info:
+      mode: chat
+      max_tokens: 32768
+      input_cost_per_token: 0.0
+      output_cost_per_token: 0.0
+
+  - model_name: cheap
+    litellm_params:
+      model: ollama/deepseek-v4-flash:cloud
+      api_base: http://localhost:11434
+    model_info:
+      mode: chat
+      max_tokens: 32768
+      input_cost_per_token: 0.0
+      output_cost_per_token: 0.0
+
+  - model_name: local
+    litellm_params:
+      model: ollama/deepseek-v4-pro:cloud
+      api_base: http://localhost:11434
+    model_info:
+      mode: chat
+      max_tokens: 32768
+      input_cost_per_token: 0.0
+      output_cost_per_token: 0.0
 
 litellm_settings:
   drop_params: true

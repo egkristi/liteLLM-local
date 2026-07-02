@@ -4,157 +4,307 @@ model_list:
     litellm_params:
       model: deepseek/deepseek-chat
       api_key: os.environ/DEEPSEEK_API_KEY
+    model_info:
+      mode: chat
+      max_tokens: 65536
+      input_cost_per_token: 0.00000014
+      output_cost_per_token: 0.00000028
 
   - model_name: deepseek-v4-flash
     litellm_params:
       model: deepseek/deepseek-chat
       api_key: os.environ/DEEPSEEK_API_KEY
+    model_info:
+      mode: chat
+      max_tokens: 65536
+      input_cost_per_token: 0.00000014
+      output_cost_per_token: 0.00000028
 
   - model_name: deepseek-r1
     litellm_params:
       model: deepseek/deepseek-reasoner
       api_key: os.environ/DEEPSEEK_API_KEY
+    model_info:
+      mode: chat
+      max_tokens: 65536
+      input_cost_per_token: 0.00000055
+      output_cost_per_token: 0.00000219
 
   # Anthropic Claude
   - model_name: claude-sonnet
     litellm_params:
       model: anthropic/claude-sonnet-4-6
       api_key: os.environ/ANTHROPIC_API_KEY
+    model_info:
+      mode: chat
+      max_tokens: 200000
+      input_cost_per_token: 0.000003
+      output_cost_per_token: 0.000015
 
   - model_name: claude-opus
     litellm_params:
       model: anthropic/claude-opus-4-6
       api_key: os.environ/ANTHROPIC_API_KEY
+    model_info:
+      mode: chat
+      max_tokens: 200000
+      input_cost_per_token: 0.000015
+      output_cost_per_token: 0.000075
 
   # Groq — fast inference
   - model_name: groq-llama
     litellm_params:
       model: groq/llama-3.3-70b-versatile
       api_key: os.environ/GROQ_API_KEY
+    model_info:
+      mode: chat
+      max_tokens: 32768
+      input_cost_per_token: 0.0
+      output_cost_per_token: 0.0
 
   # Mistral — strong European models
   - model_name: mistral-large
     litellm_params:
       model: mistral/mistral-large-latest
       api_key: os.environ/MISTRAL_API_KEY
+    model_info:
+      mode: chat
+      max_tokens: 131072
+      input_cost_per_token: 0.000002
+      output_cost_per_token: 0.000006
 
   - model_name: codestral
     litellm_params:
       model: mistral/codestral-latest
       api_key: os.environ/MISTRAL_API_KEY
+    model_info:
+      mode: chat
+      max_tokens: 256000
+      input_cost_per_token: 0.000001
+      output_cost_per_token: 0.000003
 
   # Moonshot / Kimi
   - model_name: kimi-latest
     litellm_params:
       model: moonshot/moonshot-v1-128k
       api_key: os.environ/KIMI_API_KEY
+    model_info:
+      mode: chat
+      max_tokens: 131072
+      input_cost_per_token: 0.00000008
+      output_cost_per_token: 0.00000028
 
   # Ollama — local models (free, run on your machine)
   - model_name: deepseek-local
     litellm_params:
       model: ollama/deepseek-v4-pro:cloud
       api_base: http://localhost:11434
+    model_info:
+      mode: chat
+      max_tokens: 32768
+      input_cost_per_token: 0.0
+      output_cost_per_token: 0.0
 
   - model_name: qwen2.5-coder
     litellm_params:
       model: ollama/qwen2.5-coder
       api_base: http://localhost:11434
+    model_info:
+      mode: chat
+      max_tokens: 32768
+      input_cost_per_token: 0.0
+      output_cost_per_token: 0.0
 
   # Ollama — cloud models (hosted by Ollama, free tier available)
   - model_name: deepseek-v4-pro-cloud
     litellm_params:
       model: ollama/deepseek-v4-pro:cloud
       api_base: http://localhost:11434
+    model_info:
+      mode: chat
+      max_tokens: 32768
+      input_cost_per_token: 0.0
+      output_cost_per_token: 0.0
 
   - model_name: deepseek-v4-flash-cloud
     litellm_params:
       model: ollama/deepseek-v4-flash:cloud
       api_base: http://localhost:11434
+    model_info:
+      mode: chat
+      max_tokens: 32768
+      input_cost_per_token: 0.0
+      output_cost_per_token: 0.0
 
   - model_name: gemma4-31b-cloud
     litellm_params:
       model: ollama/gemma4:31b-cloud
       api_base: http://localhost:11434
+    model_info:
+      mode: chat
+      max_tokens: 32768
+      input_cost_per_token: 0.0
+      output_cost_per_token: 0.0
 
   - model_name: gemini-3-flash-cloud
     litellm_params:
       model: ollama/gemini-3-flash-preview:cloud
       api_base: http://localhost:11434
+    model_info:
+      mode: chat
+      max_tokens: 32768
+      input_cost_per_token: 0.0
+      output_cost_per_token: 0.0
 
   - model_name: glm-5.1-cloud
     litellm_params:
       model: ollama/glm-5.1:cloud
       api_base: http://localhost:11434
+    model_info:
+      mode: chat
+      max_tokens: 32768
+      input_cost_per_token: 0.0
+      output_cost_per_token: 0.0
 
   - model_name: glm-5.2-cloud
     litellm_params:
       model: ollama/glm-5.2:cloud
       api_base: http://localhost:11434
+    model_info:
+      mode: chat
+      max_tokens: 32768
+      input_cost_per_token: 0.0
+      output_cost_per_token: 0.0
 
   - model_name: kimi-k2.5-cloud
     litellm_params:
       model: ollama/kimi-k2.5:cloud
       api_base: http://localhost:11434
+    model_info:
+      mode: chat
+      max_tokens: 32768
+      input_cost_per_token: 0.0
+      output_cost_per_token: 0.0
 
   - model_name: kimi-k2.6-cloud
     litellm_params:
       model: ollama/kimi-k2.6:cloud
       api_base: http://localhost:11434
+    model_info:
+      mode: chat
+      max_tokens: 32768
+      input_cost_per_token: 0.0
+      output_cost_per_token: 0.0
 
   - model_name: kimi-k2.7-code-cloud
     litellm_params:
       model: ollama/kimi-k2.7-code:cloud
       api_base: http://localhost:11434
+    model_info:
+      mode: chat
+      max_tokens: 32768
+      input_cost_per_token: 0.0
+      output_cost_per_token: 0.0
 
   - model_name: minimax-m2.7-cloud
     litellm_params:
       model: ollama/minimax-m2.7:cloud
       api_base: http://localhost:11434
+    model_info:
+      mode: chat
+      max_tokens: 32768
+      input_cost_per_token: 0.0
+      output_cost_per_token: 0.0
 
   - model_name: minimax-m3-cloud
     litellm_params:
       model: ollama/minimax-m3:cloud
       api_base: http://localhost:11434
+    model_info:
+      mode: chat
+      max_tokens: 32768
+      input_cost_per_token: 0.0
+      output_cost_per_token: 0.0
 
   - model_name: ministral-3-3b-cloud
     litellm_params:
       model: ollama/ministral-3:3b-cloud
       api_base: http://localhost:11434
+    model_info:
+      mode: chat
+      max_tokens: 32768
+      input_cost_per_token: 0.0
+      output_cost_per_token: 0.0
 
   - model_name: ministral-3-8b-cloud
     litellm_params:
       model: ollama/ministral-3:8b-cloud
       api_base: http://localhost:11434
+    model_info:
+      mode: chat
+      max_tokens: 32768
+      input_cost_per_token: 0.0
+      output_cost_per_token: 0.0
 
   - model_name: ministral-3-14b-cloud
     litellm_params:
       model: ollama/ministral-3:14b-cloud
       api_base: http://localhost:11434
+    model_info:
+      mode: chat
+      max_tokens: 32768
+      input_cost_per_token: 0.0
+      output_cost_per_token: 0.0
 
   - model_name: mistral-large-3-675b-cloud
     litellm_params:
       model: ollama/mistral-large-3:675b-cloud
       api_base: http://localhost:11434
+    model_info:
+      mode: chat
+      max_tokens: 32768
+      input_cost_per_token: 0.0
+      output_cost_per_token: 0.0
 
   - model_name: qwen3.5-397b-cloud
     litellm_params:
       model: ollama/qwen3.5:397b-cloud
       api_base: http://localhost:11434
+    model_info:
+      mode: chat
+      max_tokens: 32768
+      input_cost_per_token: 0.0
+      output_cost_per_token: 0.0
 
   - model_name: qwen3-vl-235b-cloud
     litellm_params:
       model: ollama/qwen3-vl:235b-cloud
       api_base: http://localhost:11434
+    model_info:
+      mode: chat
+      max_tokens: 32768
+      input_cost_per_token: 0.0
+      output_cost_per_token: 0.0
 
   - model_name: qwen3-vl-235b-instruct-cloud
     litellm_params:
       model: ollama/qwen3-vl:235b-instruct-cloud
       api_base: http://localhost:11434
+    model_info:
+      mode: chat
+      max_tokens: 32768
+      input_cost_per_token: 0.0
+      output_cost_per_token: 0.0
 
   - model_name: nomic-embed-text
     litellm_params:
       model: ollama/nomic-embed-text:latest
       api_base: http://localhost:11434
+    model_info:
+      mode: embedding
+      max_tokens: 8192
+      input_cost_per_token: 0.0
+      output_cost_per_token: 0.0
 
   # Automatic fallback: if a model fails (e.g., rate limit), try the next one
   # Usage: set model="fallback-deepseek" in your client to use this chain
@@ -162,6 +312,11 @@ model_list:
     litellm_params:
       model: deepseek/deepseek-chat
       api_key: os.environ/DEEPSEEK_API_KEY
+    model_info:
+      mode: chat
+      max_tokens: 65536
+      input_cost_per_token: 0.00000014
+      output_cost_per_token: 0.00000028
     fallback:
       - model_name: claude-sonnet
         litellm_params:
@@ -179,31 +334,61 @@ model_list:
     litellm_params:
       model: deepseek/deepseek-chat
       api_key: os.environ/DEEPSEEK_API_KEY
+    model_info:
+      mode: chat
+      max_tokens: 65536
+      input_cost_per_token: 0.00000014
+      output_cost_per_token: 0.00000028
 
   - model_name: best-chat
     litellm_params:
       model: anthropic/claude-sonnet-4-6
       api_key: os.environ/ANTHROPIC_API_KEY
+    model_info:
+      mode: chat
+      max_tokens: 200000
+      input_cost_per_token: 0.000003
+      output_cost_per_token: 0.000015
 
   - model_name: fast
     litellm_params:
       model: groq/llama-3.3-70b-versatile
       api_key: os.environ/GROQ_API_KEY
+    model_info:
+      mode: chat
+      max_tokens: 32768
+      input_cost_per_token: 0.0
+      output_cost_per_token: 0.0
 
   - model_name: cheap
     litellm_params:
       model: ollama/deepseek-v4-flash:cloud
       api_base: http://localhost:11434
+    model_info:
+      mode: chat
+      max_tokens: 32768
+      input_cost_per_token: 0.0
+      output_cost_per_token: 0.0
 
   - model_name: local
     litellm_params:
       model: ollama/deepseek-v4-pro:cloud
       api_base: http://localhost:11434
+    model_info:
+      mode: chat
+      max_tokens: 32768
+      input_cost_per_token: 0.0
+      output_cost_per_token: 0.0
 
   - model_name: embedding
     litellm_params:
       model: ollama/nomic-embed-text:latest
       api_base: http://localhost:11434
+    model_info:
+      mode: embedding
+      max_tokens: 8192
+      input_cost_per_token: 0.0
+      output_cost_per_token: 0.0
 
 litellm_settings:
   drop_params: true        # strips unsupported params (fixes DeepSeek reasoning_content issue)

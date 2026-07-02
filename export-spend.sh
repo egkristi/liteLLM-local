@@ -73,8 +73,8 @@ if [ "$BY_MODEL" = true ]; then
     fi
 
     # Parse each line for cost and model info
+    local cost model tokens
     while IFS= read -r line; do
-      local cost model tokens
       cost=$(echo "$line" | grep -oE 'cost=\$?[0-9]+\.[0-9]+' | sed 's/cost=\$//' | head -1 || echo "")
       if [ -z "$cost" ]; then
         cost=$(echo "$line" | grep -oE '"cost":\s*[0-9]+\.[0-9]+' | sed 's/"cost":\s*//' | head -1 || echo "")
@@ -113,8 +113,8 @@ else
       fi
     fi
 
+    local cost tokens
     while IFS= read -r line; do
-      local cost tokens
       cost=$(echo "$line" | grep -oE 'cost=\$?[0-9]+\.[0-9]+' | sed 's/cost=\$//' | head -1 || echo "")
       if [ -z "$cost" ]; then
         cost=$(echo "$line" | grep -oE '"cost":\s*[0-9]+\.[0-9]+' | sed 's/"cost":\s*//' | head -1 || echo "")

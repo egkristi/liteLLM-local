@@ -95,8 +95,8 @@ get_models() {
   fi
 
   # Read model names from config.yaml
+  local name
   while IFS= read -r line; do
-    local name
     name=$(echo "$line" | sed 's/^  - model_name: //')
     # Skip fallback models
     if [ "$name" = "fallback-deepseek" ]; then

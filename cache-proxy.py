@@ -132,8 +132,11 @@ class CacheHandler(BaseHTTPRequestHandler):
     def log_message(self, format, *args):
         return
 
-    def _proxy_request(self, body: bytes, path: str) -> tuple[bytes, int, dict]:
-        """Forward a request to the LiteLLM backend."""
+    def _proxy_request(self, body: Optional[bytes], path: str) -> tuple[bytes, int, dict]:
+        """Forward a request to the LiteLLM backend.
+
+        For GET/HEAD/DELETE requests, body should be None (no body sent).
+        """
         url = f"http://localhost:{BACKEND_PORT}{path}"
         req = urllib.request.Request(
             url,
@@ -183,8 +186,8 @@ class CacheHandler(BaseHTTPRequestHandler):
             return "unknown"
 
     def do_GET(self):
-        body = self.rfile.read(int(self.headers.get("Content-Length", 0)))
-        resp_body, status, headers = self._proxy_request(body, self.path)
+        # GET requests have no body — pass None explicitly
+        resp_body, status, headers = self._proxy_request(None, self.path)
         self._send_response(resp_body, status, headers)
 
     def do_POST(self):
@@ -240,6 +243,8 @@ class CacheHandler(BaseHTTPRequestHandler):
 def main():
     import argparse
 
+    global BACKEND_PORT
+
     parser = argparse.ArgumentParser(
         prog="cache-proxy",
         description="Caching proxy for LiteLLM Local",
@@ -255,7 +260,6 @@ def main():
 
     args = parser.parse_args()
 
-    global BACKEND_PORT
     BACKEND_PORT = args.backend
 
     if args.clear:

@@ -70,7 +70,7 @@ PORT="${PORT:-4000}"
 if curl -sf "http://localhost:$PORT/health" > /dev/null 2>&1; then
   pass "Proxy is running on port $PORT"
   # List available models
-  MODELS=$(curl -sf "http://localhost:$PORT/models" 2>/dev/null | python3 -c "import sys,json; data=json.load(sys.stdin); print('\n'.join(m['id'] for m in data.get('data',[])))" 2>/dev/null || true)
+  MODELS=$(curl -sf "http://localhost:$PORT/v1/models" 2>/dev/null | python3 -c "import sys,json; data=json.load(sys.stdin); print('\n'.join(m['id'] for m in data.get('data',[])))" 2>/dev/null || true)
   if [ -n "$MODELS" ]; then
     echo "     Available models:"
     echo "$MODELS" | while IFS= read -r m; do echo "       - $m"; done

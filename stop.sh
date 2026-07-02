@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -uo pipefail
+set -euo pipefail
 
 PORT="${PORT:-4000}"
 PID=$(lsof -Pi ":$PORT" -sTCP:LISTEN -t 2>/dev/null || true)

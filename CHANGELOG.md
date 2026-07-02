@@ -15,6 +15,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - New Ollama cloud model: `kimi-k2.7-code-cloud` (Kimi K2.7 Code) — added to `config.yaml`, VS Code settings, and generator script
 
 ### Fixed
+- **`cache-proxy.py` `do_GET()`** — no longer reads request body (was causing hangs with `Content-Length` headers on GET). Also fixed `global BACKEND_PORT` declaration ordering bug. (C-1, C-2)
+- **`stop.sh`** — added missing `set -e` so `kill` failures are not silently ignored. (H-3)
+- **`validate.sh`** — changed `/models` endpoint to `/v1/models` for LiteLLM API compatibility. (H-4)
+- **`usage.sh`** — added `jq`-based JSON log parsing with graceful fallback to grep. (H-5)
+- **`benchmark.sh`** — moved `local name` declaration outside `while read` loop to avoid subshell scoping issues. (H-1)
+- **`export-spend.sh`** — moved `local` declarations outside `while read` loops to fix subshell scoping in both per-model and daily summary modes. (H-2)
+- **`config.yaml`** — added `model_info` blocks (mode, max_tokens, input/output cost per token) to every model entry for accurate cost tracking. (M-1)
+- **`config.prod.yaml`** — added model aliases (`best-coding`, `best-chat`, `fast`, `cheap`, `local`) with `model_info` blocks. (M-2)
 - **Model aliases (`best-coding`, `best-chat`, etc.) now work** — replaced `model_alias_map` (not a valid LiteLLM config key, silently ignored) with proper `model_list` entries. Aliases are now registered with the proxy and accepted by `/chat/completions`. (ISSUE-20)
 - **`config.prod.yaml`** — removed stale `model_alias` section that was also ignored by the proxy
 - **`scripts/generate_vscode_settings.py`** — removed stale `model_alias` parsing logic; aliases are now parsed from `model_list` like all other models
