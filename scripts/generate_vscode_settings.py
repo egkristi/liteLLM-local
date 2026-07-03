@@ -4,6 +4,28 @@
 Reads the model_list from config.yaml and generates VS Code Copilot Chat
 language model entries so the two never drift out of sync.
 
+Capabilities (tool calling, vision, input/output token limits) are derived
+from each entry's own `litellm_params.model` and `model_info` block in
+config.yaml -- not from the local model_name/alias string. This matters
+because several entries (e.g. "best-chat", "fast", "embedding") are aliases
+that point at the same underlying model as a "canonical" entry elsewhere in
+the file. Guessing capabilities from the alias name instead of the real
+underlying model caused three confirmed bugs before this rewrite:
+  - "best-chat" (-> anthropic/claude-sonnet-4-6) reported vision: false and
+    maxInputTokens: 128000 instead of the real vision: true / 200000.
+  - "fast" (-> groq/llama-3.3-70b-versatile) reported maxOutputTokens: 16000
+    instead of Groq's real ~8000 cap, risking a forced mid-response cutoff.
+  - "embedding" (-> ollama/nomic-embed-text) reported toolCalling: true and
+    maxOutputTokens: 16000 instead of false / 1, since it's an
+    embedding-only model with no chat/tool-calling support.
+
+maxOutputTokens is also capped conservatively (see SAFE_MAX_OUTPUT_TOKENS
+below) because VS Code Copilot Chat has an internal response-size ceiling
+(~60KB) and crashes with "Response too long" instead of truncating
+gracefully when a completion is cut off by hitting its token limit
+(finish_reason: "length"). See docs/TROUBLESHOOTING.md and
+AGENT-ISSUES.md (H-6) for background.
+
 Usage:
   python3 scripts/generate_vscode_settings.py
   make vscode-config
@@ -18,77 +40,85 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent
 CONFIG_PATH = PROJECT_ROOT / "config.yaml"
 VSCODE_SETTINGS_PATH = PROJECT_ROOT / ".vscode" / "settings.json"
 
+# Conservative default output cap. VS Code Copilot Chat's internal buffer
+# tops out well below what most providers advertise as their real max
+# output; keeping this low reduces (though doesn't eliminate) the chance of
+# tripping the "Response too long" crash. Embedding-mode models get 1
+# (they don't generate text at all).
+SAFE_MAX_OUTPUT_TOKENS = 8000
+DEFAULT_MAX_INPUT_TOKENS = 128000
+
+# Keyword match against the *underlying* litellm model id (not the local
+# alias name) to guess vision support. Best-effort; correct as of the
+# models configured when this list was written -- update if a new
+# vision-capable provider/model is added and doesn't match any keyword.
+VISION_KEYWORDS = [
+    "vl-", "vision", "gemini", "kimi", "minimax", "mistral-large",
+    "claude-sonnet", "claude-opus",
+]
+
+MODEL_NAME_RE = re.compile(
+    r'^  - model_name:\s+(\S+)\s*\n((?:  (?!- model_name:).*\n?)*)',
+    re.MULTILINE,
+)
+UNDERLYING_MODEL_RE = re.compile(r'^\s*model:\s*(\S+)\s*$', re.MULTILINE)
+MODE_RE = re.compile(r'^\s*mode:\s*(\S+)\s*$', re.MULTILINE)
+MAX_TOKENS_RE = re.compile(r'^\s*max_tokens:\s*(\d+)\s*$', re.MULTILINE)
+
 
 def parse_config(config_path: Path):
-    """Parse model_list from config.yaml and return list of model entries."""
+    """Parse model_list entries from config.yaml.
+
+    Returns a list of dicts: name, underlying_model, mode, max_tokens.
+    """
     if not config_path.exists():
         print(f"Error: {config_path} not found")
         sys.exit(1)
 
     content = config_path.read_text()
 
-    # Find all top-level model entries (2-space indented model_name:)
-    model_entries = []
-    pattern = r'^  - model_name:\s+(\S+)\s*\n((?:  (?!- model_name:).*\n?)*)'
-    for match in re.finditer(pattern, content, re.MULTILINE):
+    entries = []
+    for match in MODEL_NAME_RE.finditer(content):
         name = match.group(1)
         block = match.group(2)
 
-        # Determine a nice display name
-        display_name = name.replace('-', ' ').replace('_', ' ').title()
-        # Special cases
-        name_lower = name.lower()
-        if 'deepseek' in name_lower:
-            display_name = name.replace('-', ' ').title().replace('V4', 'V4')
-        if 'qwen' in name_lower:
-            display_name = name.replace('-', ' ').title()
-        if 'kimi' in name_lower:
-            display_name = name.replace('-', ' ').title()
-        if 'ministral' in name_lower:
-            display_name = name.replace('-', ' ').title()
-        if 'nomic' in name_lower:
-            display_name = "Nomic Embed"
+        model_match = UNDERLYING_MODEL_RE.search(block)
+        mode_match = MODE_RE.search(block)
+        max_tokens_match = MAX_TOKENS_RE.search(block)
 
-        model_entries.append({
+        entries.append({
             "name": name,
-            "display": f"LiteLLM {display_name}",
+            "underlying_model": model_match.group(1) if model_match else "",
+            "mode": mode_match.group(1) if mode_match else "chat",
+            "max_tokens": int(max_tokens_match.group(1)) if max_tokens_match else None,
         })
 
-    return model_entries
+    return entries
 
 
-def _model_capabilities(name: str, block: str) -> dict:
-    """Determine model capabilities based on model name and config block."""
-    name_lower = name.lower()
+def _model_capabilities(entry: dict) -> dict:
+    """Determine model capabilities from the entry's real config data."""
+    underlying = entry["underlying_model"].lower()
+    mode = entry["mode"]
 
-    # Vision capability
-    vision = any(kw in name_lower for kw in ['vl-', 'vision', 'gemini', 'kimi', 'minimax', 'mistral-large', 'claude-sonnet', 'claude-opus'])
+    if mode == "embedding":
+        return {
+            "toolCalling": False,
+            "vision": False,
+            "maxInputTokens": entry["max_tokens"] or 8192,
+            "maxOutputTokens": 1,
+        }
 
-    # Tool calling
-    tool_calling = 'nomic-embed' not in name_lower
-
-    # Token limits
-    if 'codestral' in name_lower:
-        max_input = 256000
-    elif 'claude' in name_lower:
-        max_input = 200000
-    elif 'nomic-embed' in name_lower:
-        max_input = 8192
-    else:
-        max_input = 128000
-
-    if 'nomic-embed' in name_lower:
-        max_output = 1
-    elif 'groq-llama' in name_lower:
-        max_output = 8000
-    else:
-        max_output = 16000
+    # Ollama tags use ":" as a separator (e.g. "qwen3-vl:235b-cloud"); treat
+    # it the same as "-" so keyword matches like "vl-" still fire.
+    underlying_norm = underlying.replace(":", "-")
+    vision = any(kw in underlying_norm for kw in VISION_KEYWORDS)
 
     return {
-        "toolCalling": tool_calling,
+        "toolCalling": True,
         "vision": vision,
-        "maxInputTokens": max_input,
-        "maxOutputTokens": max_output,
+        "maxInputTokens": entry["max_tokens"] or DEFAULT_MAX_INPUT_TOKENS,
+        "maxOutputTokens": SAFE_MAX_OUTPUT_TOKENS,
     }
 
 
@@ -136,13 +166,19 @@ def _friendly_name(name: str) -> str:
     return names.get(name, name.replace('-', ' ').title())
 
 
-def generate_settings(model_entries):
+def generate_settings(entries):
     """Generate the VS Code settings JSON using customendpoint format."""
     models_array = []
+    warnings = []
 
-    for entry in model_entries:
+    for entry in entries:
         name = entry["name"]
-        caps = _model_capabilities(name, "")
+        if not entry["underlying_model"]:
+            warnings.append(
+                f"  - {name}: no litellm_params.model found; "
+                f"falling back to generic chat capabilities"
+            )
+        caps = _model_capabilities(entry)
         friendly = _friendly_name(name)
 
         model_obj = {
@@ -155,6 +191,10 @@ def generate_settings(model_entries):
             "maxOutputTokens": caps["maxOutputTokens"],
         }
         models_array.append(model_obj)
+
+    if warnings:
+        print("Warnings:")
+        print("\n".join(warnings))
 
     settings = {
         "github.copilot.chat.languageModels": [
@@ -181,12 +221,12 @@ def write_settings(settings, output_path: Path):
 
 
 def main():
-    model_entries = parse_config(CONFIG_PATH)
-    if not model_entries:
+    entries = parse_config(CONFIG_PATH)
+    if not entries:
         print("Error: no model entries found in config.yaml")
         sys.exit(1)
 
-    settings = generate_settings(model_entries)
+    settings = generate_settings(entries)
     write_settings(settings, VSCODE_SETTINGS_PATH)
 
 

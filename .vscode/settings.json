@@ -12,8 +12,8 @@
           "url": "http://localhost:4000/v1/chat/completions",
           "toolCalling": true,
           "vision": false,
-          "maxInputTokens": 128000,
-          "maxOutputTokens": 16000
+          "maxInputTokens": 65536,
+          "maxOutputTokens": 8000
         },
         {
           "id": "deepseek-v4-flash",
@@ -21,8 +21,8 @@
           "url": "http://localhost:4000/v1/chat/completions",
           "toolCalling": true,
           "vision": false,
-          "maxInputTokens": 128000,
-          "maxOutputTokens": 16000
+          "maxInputTokens": 65536,
+          "maxOutputTokens": 8000
         },
         {
           "id": "deepseek-r1",
@@ -30,8 +30,8 @@
           "url": "http://localhost:4000/v1/chat/completions",
           "toolCalling": true,
           "vision": false,
-          "maxInputTokens": 128000,
-          "maxOutputTokens": 16000
+          "maxInputTokens": 65536,
+          "maxOutputTokens": 8000
         },
         {
           "id": "claude-sonnet",
@@ -40,7 +40,7 @@
           "toolCalling": true,
           "vision": true,
           "maxInputTokens": 200000,
-          "maxOutputTokens": 16000
+          "maxOutputTokens": 8000
         },
         {
           "id": "claude-opus",
@@ -49,7 +49,7 @@
           "toolCalling": true,
           "vision": true,
           "maxInputTokens": 200000,
-          "maxOutputTokens": 16000
+          "maxOutputTokens": 8000
         },
         {
           "id": "groq-llama",
@@ -57,7 +57,7 @@
           "url": "http://localhost:4000/v1/chat/completions",
           "toolCalling": true,
           "vision": false,
-          "maxInputTokens": 128000,
+          "maxInputTokens": 32768,
           "maxOutputTokens": 8000
         },
         {
@@ -66,8 +66,8 @@
           "url": "http://localhost:4000/v1/chat/completions",
           "toolCalling": true,
           "vision": true,
-          "maxInputTokens": 128000,
-          "maxOutputTokens": 16000
+          "maxInputTokens": 131072,
+          "maxOutputTokens": 8000
         },
         {
           "id": "codestral",
@@ -76,16 +76,16 @@
           "toolCalling": true,
           "vision": false,
           "maxInputTokens": 256000,
-          "maxOutputTokens": 16000
+          "maxOutputTokens": 8000
         },
         {
           "id": "kimi-latest",
           "name": "Kimi K2.6",
           "url": "http://localhost:4000/v1/chat/completions",
           "toolCalling": true,
-          "vision": true,
-          "maxInputTokens": 128000,
-          "maxOutputTokens": 16000
+          "vision": false,
+          "maxInputTokens": 131072,
+          "maxOutputTokens": 8000
         },
         {
           "id": "deepseek-local",
@@ -93,8 +93,8 @@
           "url": "http://localhost:4000/v1/chat/completions",
           "toolCalling": true,
           "vision": false,
-          "maxInputTokens": 128000,
-          "maxOutputTokens": 16000
+          "maxInputTokens": 32768,
+          "maxOutputTokens": 8000
         },
         {
           "id": "qwen2.5-coder",
@@ -102,8 +102,8 @@
           "url": "http://localhost:4000/v1/chat/completions",
           "toolCalling": true,
           "vision": false,
-          "maxInputTokens": 128000,
-          "maxOutputTokens": 16000
+          "maxInputTokens": 32768,
+          "maxOutputTokens": 8000
         },
         {
           "id": "deepseek-v4-pro-cloud",
@@ -111,8 +111,8 @@
           "url": "http://localhost:4000/v1/chat/completions",
           "toolCalling": true,
           "vision": false,
-          "maxInputTokens": 128000,
-          "maxOutputTokens": 16000
+          "maxInputTokens": 32768,
+          "maxOutputTokens": 8000
         },
         {
           "id": "deepseek-v4-flash-cloud",
@@ -120,8 +120,8 @@
           "url": "http://localhost:4000/v1/chat/completions",
           "toolCalling": true,
           "vision": false,
-          "maxInputTokens": 128000,
-          "maxOutputTokens": 16000
+          "maxInputTokens": 32768,
+          "maxOutputTokens": 8000
         },
         {
           "id": "gemma4-31b-cloud",
@@ -129,8 +129,8 @@
           "url": "http://localhost:4000/v1/chat/completions",
           "toolCalling": true,
           "vision": false,
-          "maxInputTokens": 128000,
-          "maxOutputTokens": 16000
+          "maxInputTokens": 32768,
+          "maxOutputTokens": 8000
         },
         {
           "id": "gemini-3-flash-cloud",
@@ -138,8 +138,8 @@
           "url": "http://localhost:4000/v1/chat/completions",
           "toolCalling": true,
           "vision": true,
-          "maxInputTokens": 128000,
-          "maxOutputTokens": 16000
+          "maxInputTokens": 32768,
+          "maxOutputTokens": 8000
         },
         {
           "id": "glm-5.1-cloud",
@@ -147,8 +147,8 @@
           "url": "http://localhost:4000/v1/chat/completions",
           "toolCalling": true,
           "vision": false,
-          "maxInputTokens": 128000,
-          "maxOutputTokens": 16000
+          "maxInputTokens": 32768,
+          "maxOutputTokens": 8000
         },
         {
           "id": "glm-5.2-cloud",
@@ -156,8 +156,8 @@
           "url": "http://localhost:4000/v1/chat/completions",
           "toolCalling": true,
           "vision": false,
-          "maxInputTokens": 128000,
-          "maxOutputTokens": 16000
+          "maxInputTokens": 32768,
+          "maxOutputTokens": 8000
         },
         {
           "id": "kimi-k2.5-cloud",
@@ -165,8 +165,8 @@
           "url": "http://localhost:4000/v1/chat/completions",
           "toolCalling": true,
           "vision": true,
-          "maxInputTokens": 128000,
-          "maxOutputTokens": 16000
+          "maxInputTokens": 32768,
+          "maxOutputTokens": 8000
         },
         {
           "id": "kimi-k2.6-cloud",
@@ -174,8 +174,8 @@
           "url": "http://localhost:4000/v1/chat/completions",
           "toolCalling": true,
           "vision": true,
-          "maxInputTokens": 128000,
-          "maxOutputTokens": 16000
+          "maxInputTokens": 32768,
+          "maxOutputTokens": 8000
         },
         {
           "id": "kimi-k2.7-code-cloud",
@@ -183,8 +183,8 @@
           "url": "http://localhost:4000/v1/chat/completions",
           "toolCalling": true,
           "vision": true,
-          "maxInputTokens": 128000,
-          "maxOutputTokens": 16000
+          "maxInputTokens": 32768,
+          "maxOutputTokens": 8000
         },
         {
           "id": "minimax-m2.7-cloud",
@@ -192,8 +192,8 @@
           "url": "http://localhost:4000/v1/chat/completions",
           "toolCalling": true,
           "vision": true,
-          "maxInputTokens": 128000,
-          "maxOutputTokens": 16000
+          "maxInputTokens": 32768,
+          "maxOutputTokens": 8000
         },
         {
           "id": "minimax-m3-cloud",
@@ -201,8 +201,8 @@
           "url": "http://localhost:4000/v1/chat/completions",
           "toolCalling": true,
           "vision": true,
-          "maxInputTokens": 128000,
-          "maxOutputTokens": 16000
+          "maxInputTokens": 32768,
+          "maxOutputTokens": 8000
         },
         {
           "id": "ministral-3-3b-cloud",
@@ -210,8 +210,8 @@
           "url": "http://localhost:4000/v1/chat/completions",
           "toolCalling": true,
           "vision": false,
-          "maxInputTokens": 128000,
-          "maxOutputTokens": 16000
+          "maxInputTokens": 32768,
+          "maxOutputTokens": 8000
         },
         {
           "id": "ministral-3-8b-cloud",
@@ -219,8 +219,8 @@
           "url": "http://localhost:4000/v1/chat/completions",
           "toolCalling": true,
           "vision": false,
-          "maxInputTokens": 128000,
-          "maxOutputTokens": 16000
+          "maxInputTokens": 32768,
+          "maxOutputTokens": 8000
         },
         {
           "id": "ministral-3-14b-cloud",
@@ -228,8 +228,8 @@
           "url": "http://localhost:4000/v1/chat/completions",
           "toolCalling": true,
           "vision": false,
-          "maxInputTokens": 128000,
-          "maxOutputTokens": 16000
+          "maxInputTokens": 32768,
+          "maxOutputTokens": 8000
         },
         {
           "id": "mistral-large-3-675b-cloud",
@@ -237,8 +237,8 @@
           "url": "http://localhost:4000/v1/chat/completions",
           "toolCalling": true,
           "vision": true,
-          "maxInputTokens": 128000,
-          "maxOutputTokens": 16000
+          "maxInputTokens": 32768,
+          "maxOutputTokens": 8000
         },
         {
           "id": "qwen3.5-397b-cloud",
@@ -246,8 +246,8 @@
           "url": "http://localhost:4000/v1/chat/completions",
           "toolCalling": true,
           "vision": false,
-          "maxInputTokens": 128000,
-          "maxOutputTokens": 16000
+          "maxInputTokens": 32768,
+          "maxOutputTokens": 8000
         },
         {
           "id": "qwen3-vl-235b-cloud",
@@ -255,8 +255,8 @@
           "url": "http://localhost:4000/v1/chat/completions",
           "toolCalling": true,
           "vision": true,
-          "maxInputTokens": 128000,
-          "maxOutputTokens": 16000
+          "maxInputTokens": 32768,
+          "maxOutputTokens": 8000
         },
         {
           "id": "qwen3-vl-235b-instruct-cloud",
@@ -264,8 +264,8 @@
           "url": "http://localhost:4000/v1/chat/completions",
           "toolCalling": true,
           "vision": true,
-          "maxInputTokens": 128000,
-          "maxOutputTokens": 16000
+          "maxInputTokens": 32768,
+          "maxOutputTokens": 8000
         },
         {
           "id": "nomic-embed-text",
@@ -282,8 +282,8 @@
           "url": "http://localhost:4000/v1/chat/completions",
           "toolCalling": true,
           "vision": false,
-          "maxInputTokens": 128000,
-          "maxOutputTokens": 16000
+          "maxInputTokens": 65536,
+          "maxOutputTokens": 8000
         },
         {
           "id": "best-coding",
@@ -291,17 +291,17 @@
           "url": "http://localhost:4000/v1/chat/completions",
           "toolCalling": true,
           "vision": false,
-          "maxInputTokens": 128000,
-          "maxOutputTokens": 16000
+          "maxInputTokens": 65536,
+          "maxOutputTokens": 8000
         },
         {
           "id": "best-chat",
           "name": "\u2b50 Best Chat \u2192 Claude Sonnet 4.6",
           "url": "http://localhost:4000/v1/chat/completions",
           "toolCalling": true,
-          "vision": false,
-          "maxInputTokens": 128000,
-          "maxOutputTokens": 16000
+          "vision": true,
+          "maxInputTokens": 200000,
+          "maxOutputTokens": 8000
         },
         {
           "id": "fast",
@@ -309,8 +309,8 @@
           "url": "http://localhost:4000/v1/chat/completions",
           "toolCalling": true,
           "vision": false,
-          "maxInputTokens": 128000,
-          "maxOutputTokens": 16000
+          "maxInputTokens": 32768,
+          "maxOutputTokens": 8000
         },
         {
           "id": "cheap",
@@ -318,8 +318,8 @@
           "url": "http://localhost:4000/v1/chat/completions",
           "toolCalling": true,
           "vision": false,
-          "maxInputTokens": 128000,
-          "maxOutputTokens": 16000
+          "maxInputTokens": 32768,
+          "maxOutputTokens": 8000
         },
         {
           "id": "local",
@@ -327,17 +327,17 @@
           "url": "http://localhost:4000/v1/chat/completions",
           "toolCalling": true,
           "vision": false,
-          "maxInputTokens": 128000,
-          "maxOutputTokens": 16000
+          "maxInputTokens": 32768,
+          "maxOutputTokens": 8000
         },
         {
           "id": "embedding",
           "name": "\u2b50 Embedding \u2192 Nomic Embed Text",
           "url": "http://localhost:4000/v1/chat/completions",
-          "toolCalling": true,
+          "toolCalling": false,
           "vision": false,
-          "maxInputTokens": 128000,
-          "maxOutputTokens": 16000
+          "maxInputTokens": 8192,
+          "maxOutputTokens": 1
         }
       ]
     }
