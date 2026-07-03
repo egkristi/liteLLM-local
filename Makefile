@@ -38,6 +38,9 @@ install-autostart: ## Install launchd plist to auto-start proxy on login
 vscode-config: ## Regenerate .vscode/settings.json from config.yaml
 	@python3 scripts/generate_vscode_settings.py
 
+vscode-config-global: vscode-config ## Regenerate + sync model list into VS Code's global User settings (all projects on this Mac)
+	@./scripts/sync_global_vscode_settings.sh
+
 audit: ## Check .env against .env.example for missing/placeholder keys
 	@./audit.sh
 
