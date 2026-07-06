@@ -1,0 +1,67 @@
+# systemd service unit for LiteLLM Proxy
+#
+# Install:
+#   sudo cp litellm-proxy.service /etc/systemd/system/
+#   sudo systemctl daemon-reload
+#   sudo systemctl enable litellm-proxy
+#   sudo systemctl start litellm-proxy
+#
+# Environment variables (optional):
+#   LITELLM_CONFIG  — config file (default: config.yaml)
+#   LITELLM_PORT    — proxy port (default: 4000)
+#   LITELLM_RELOAD  — set to "true" to watch config for changes
+#   LITELLM_JSON_LOGS — set to "true" for JSON log format
+#   LITELLM_CACHE   — set to "true" to enable response caching
+#   LITELLM_CACHE_PORT — cache proxy frontend port (default: 4001)
+#
+# Override via systemd drop-in:
+#   sudo systemctl edit litellm-proxy
+#
+# [Service]
+# Environment=LITELLM_PORT=4001
+# Environment=LITELLM_CONFIG=config.prod.yaml
+
+[Unit]
+Description=LiteLLM Proxy — OpenAI-compatible endpoint for multiple AI providers
+Documentation=https://docs.litellm.ai/docs/
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+
+# Path to the project directory
+WorkingDirectory=/home/erling/code/liteLLM-local
+
+# Main command — uses the start.sh script which handles .env sourcing,
+# prerequisite checks, log rotation, and cache proxy setup
+ExecStart=/home/erling/code/liteLLM-local/start.sh
+
+# Restart policy — always restart unless explicitly stopped
+Restart=always
+RestartSec=5
+
+# Throttle restart if crashing repeatedly
+StartLimitIntervalSec=60
+StartLimitBurst=5
+
+# Environment file — API keys and other secrets
+EnvironmentFile=/home/erling/code/liteLLM-local/.env
+
+# Logging — systemd-journald captures stdout/stderr
+StandardOutput=journal
+StandardError=journal
+
+# Security hardening
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=read-only
+ReadWritePaths=/home/erling/code/liteLLM-local/logs
+PrivateTmp=true
+PrivateDevices=true
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+
+[Install]
+WantedBy=multi-user.target

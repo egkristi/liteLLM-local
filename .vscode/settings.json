@@ -3,7 +3,7 @@
     {
       "name": "LiteLLM-local",
       "vendor": "customendpoint",
-      "apiKey": "${input:chat.lm.secret.-5ddf5cda}",
+      "apiKey": "not-needed",
       "apiType": "chat-completions",
       "models": [
         {

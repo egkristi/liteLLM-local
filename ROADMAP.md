@@ -10,7 +10,6 @@
 - [ ] Fix `usage.sh` — add `jq`-based JSON log parsing for accurate cost/token extraction
 - [ ] Add `make webui` target to Makefile
 - [ ] Update README file tree to include all scripts and docs
-- [ ] Update README autostart section to reference `make install-autostart`
 - [ ] Add `OLLAMA_API_KEY`, `NVIDIA_API_KEY` to `.env.example`
 - [ ] Add `general_settings` section (commented) to dev `config.yaml` for discoverability
 - [ ] Add `LITELLM_MASTER_KEY` and `--reload` support to `docker-compose.yml`
@@ -37,7 +36,6 @@
 - [ ] Add OpenTelemetry tracing integration
 - [ ] Add support for embedding models (text-embedding-3, etc.)
 - [ ] Grafana dashboard improvements: per-model cost panel, p95 latency per provider, error rate panel, daily budget burn gauge
-- [ ] Add `install-autostart.sh` support for `LITELLM_CONFIG` env var
 - [ ] Add `make upgrade` target to update LiteLLM to latest version
 - [ ] Add `make doctor` target — comprehensive system diagnostics
 
@@ -74,3 +72,7 @@
 - [x] Export daily spend to `spend.csv` (model, tokens, cost) for analysis in Excel/Numbers
 - [x] Model benchmarking script (`benchmark.sh`) — sends a standard set of coding prompts to each model and reports latency + cost
 - [x] Request caching layer (`cache-proxy.py`) — SQLite-backed cache for repeated prompts, configurable TTL, cache-hit stats
+- [x] **Linux systemd service** (`litellm-proxy.service`) — hardened systemd unit with restart policy and journald logging
+- [x] **Cross-platform autostart installer** (`install-autostart.sh`) — rewritten to support Linux (systemd) and macOS (launchd) with `--uninstall` and `--user` flags
+- [x] **Makefile service targets** — `install-autostart`, `uninstall-autostart`, `install-autostart-user`, `uninstall-autostart-user`
+- [x] Update README autostart section to reference `make install-autostart`

@@ -6,12 +6,24 @@ CONFIG ?= config.yaml
 help: ## Show this help
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-10s\033[0m %s\n", $$1, $$2}'
 
-install: ## Install uv and litellm (if missing)
+install: ## Install uv, litellm, and prepare environment (logs dir, spend tracking)
 	@echo "Checking uv..."
 	@command -v uv >/dev/null 2>&1 || (echo "Installing uv..."; curl -LsSf https://astral.sh/uv/install.sh | sh)
 	@echo "Checking litellm..."
 	@uv tool list 2>/dev/null | grep -q litellm || uv tool install 'litellm[proxy]'
+	@echo "Creating logs/ directory..."
+	@mkdir -p logs
+	@echo "Ensuring spend_logs is enabled in config.yaml..."
+	@grep -q 'spend_logs: true' config.yaml 2>/dev/null && echo "  OK — spend_logs is enabled (file-based, no database needed)" || echo "  WARNING: spend_logs is not enabled. Run 'make enable-spend' to fix."
 	@echo "Done."
+
+enable-spend: ## Enable spend tracking in config.yaml (file-based, no database needed)
+	@if grep -q 'spend_logs: true' config.yaml 2>/dev/null; then \
+		echo "spend_logs is already enabled."; \
+	else \
+		sed -i 's/spend_logs: false/spend_logs: true/' config.yaml && \
+		echo "Enabled spend_logs in config.yaml (file-based logging — no PostgreSQL required)."; \
+	fi
 
 start: ## Start the LiteLLM proxy (CONFIG=config.prod.yaml make start)
 	@LITELLM_CONFIG=$(CONFIG) PORT=$(PORT) ./start.sh
@@ -32,8 +44,17 @@ logs: ## Tail the latest log file
 validate: ## Validate .env, config, and proxy health
 	@CONFIG=$(CONFIG) PORT=$(PORT) ./validate.sh
 
-install-autostart: ## Install launchd plist to auto-start proxy on login
+install-autostart: ## Install autostart (Linux: systemd, macOS: launchd)
 	@./install-autostart.sh
+
+uninstall-autostart: ## Remove autostart (Linux: systemd, macOS: launchd)
+	@./install-autostart.sh --uninstall
+
+install-autostart-user: ## Install autostart as Linux user service (systemd --user)
+	@./install-autostart.sh --user
+
+uninstall-autostart-user: ## Remove Linux user service autostart
+	@./install-autostart.sh --uninstall --user
 
 vscode-config: ## Regenerate .vscode/settings.json from config.yaml
 	@python3 scripts/generate_vscode_settings.py

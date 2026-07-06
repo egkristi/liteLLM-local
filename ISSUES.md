@@ -32,6 +32,7 @@ Configured `litellm_settings.log_file` and `logs/` directory creation in `start.
 
 ### ISSUE-6: No usage / cost tracking ✅
 Enabled `spend_logs: true` in `config.yaml` and created `usage.sh` for quick log-based usage inspection.
+**Note:** `spend_logs: true` logs spend to the JSON log file — no PostgreSQL database needed. The earlier comment "requires PostgreSQL" was misleading; only the virtual keys API (`/key/generate`, `/key/info`) requires PostgreSQL + `DATABASE_URL` + `LITELLM_MASTER_KEY`. File-based spend tracking works standalone.
 
 ### ISSUE-7: `docker-compose.yml` does not persist logs ✅
 Added `./logs:/app/logs` volume mount to `docker-compose.yml`.
@@ -66,18 +67,6 @@ Replaced Unicode em-dash with ASCII `--` in `.env` and `.env.example` comments.
 ### ISSUE-17: `start.sh` does not export `.env` variables to child process ✅
 Added `set -a` before `source .env` and `set +a` after to auto-export all variables to child processes.
 
-### ISSUE-1: Missing Moonshot/Kimi provider configuration ✅
-Added `kimi-latest` model to `config.yaml` and `KIMI_API_KEY` to `.env.example`.
-
-### ISSUE-2: `start.sh` does not validate prerequisites ✅
-Added checks for `uv` and `litellm` installation with helpful error messages.
-
-### ISSUE-3: `start.sh` does not handle port conflicts ✅
-Added port availability check and `PORT` environment variable override.
-
-### ISSUE-4: No health-check / status script ✅
-Created `status.sh` that pings the proxy and lists available models.
-
 ### ISSUE-5: No log rotation or structured logging ✅
 Configured `litellm_settings.log_file` and `logs/` directory creation in `start.sh`.
 
@@ -107,18 +96,6 @@ Added `webui` subcommand to `litellm-local`.
 
 ### ISSUE-14: No quick validation / smoke-test script ✅
 Added `test.sh` that sends a small chat-completion request and reports success/failure.
-
-### ISSUE-1: Missing Moonshot/Kimi provider configuration ✅
-Added `kimi-latest` model to `config.yaml` and `KIMI_API_KEY` to `.env.example`.
-
-### ISSUE-2: `start.sh` does not validate prerequisites ✅
-Added checks for `uv` and `litellm` installation with helpful error messages.
-
-### ISSUE-3: `start.sh` does not handle port conflicts ✅
-Added port availability check and `PORT` environment variable override.
-
-### ISSUE-4: No health-check / status script ✅
-Created `status.sh` that pings the proxy and lists available models.
 
 ### ISSUE-5: No log rotation or structured logging ✅
 Configured `litellm_settings.log_file` and `logs/` directory creation in `start.sh`.

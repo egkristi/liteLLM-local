@@ -8,6 +8,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- **`make enable-spend`** — new target to enable file-based spend tracking in config.yaml
+- **`make install` now prepares spend tracking** — creates `logs/` directory and verifies `spend_logs: true` in config.yaml
+- **Linux systemd service** (`litellm-proxy.service`) — hardened systemd unit with `NoNewPrivileges`, `ProtectSystem`, `ProtectHome`, `PrivateTmp`, restart policy, and journald logging
+- **Cross-platform autostart installer** (`install-autostart.sh`) — rewritten to support both Linux (systemd) and macOS (launchd). New flags: `--uninstall`, `--user` (Linux user-mode systemd)
+- **Makefile targets** — `install-autostart`, `uninstall-autostart`, `install-autostart-user`, `uninstall-autostart-user` for service lifecycle management
 - New DeepSeek cloud model: `deepseek-r1` (DeepSeek R1) — added to `config.yaml`, VS Code settings, and generator script
 - New DeepSeek cloud model: `deepseek-v4-flash` (DeepSeek V4 Flash) — added to `config.yaml`, VS Code settings, and generator script
 - New Ollama cloud model: `glm-5.2-cloud` (GLM 5.2) — added to `config.yaml`, VS Code settings, and generator script

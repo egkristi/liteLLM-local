@@ -393,5 +393,5 @@ model_list:
 litellm_settings:
   drop_params: true        # strips unsupported params (fixes DeepSeek reasoning_content issue)
   set_verbose: false
-  spend_logs: true         # enable usage / cost tracking (ISSUE-6)
+  spend_logs: true         # logs spend to JSON log file — no database needed (ISSUE-6)
   log_file: logs/litellm.log # persistent log file (ISSUE-5)
