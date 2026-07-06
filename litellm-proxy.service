@@ -30,6 +30,9 @@ Wants=network-online.target
 [Service]
 Type=simple
 
+# PATH must include ~/.local/bin for uv (systemd uses a minimal PATH)
+Environment=PATH=/home/erling/.local/bin:/usr/local/bin:/usr/bin:/bin
+
 # Path to the project directory
 WorkingDirectory=/home/erling/code/liteLLM-local
 
