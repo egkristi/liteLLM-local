@@ -2,7 +2,7 @@
 
 ## Now
 
-- [ ] Add `model_info` blocks to `config.yaml` (max_tokens, cost per token) for accurate cost tracking
+- [x] Add `model_info` blocks to `config.yaml` (max_tokens, cost per token) for accurate cost tracking
 - [ ] Fix `validate.sh` health check — uses `/models` instead of `/v1/models`
 - [ ] Fix `benchmark.sh` — `local` keyword used outside function body in `get_models()`
 - [ ] Fix `export-spend.sh` — `local` keyword used outside functions, `declare -A` in pipeline subshell

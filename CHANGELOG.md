@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- **Kimi K3 series models** — replaced deprecated `kimi-latest`/`moonshot-v1-128k` with `kimi-k3` (flagship, 1M context), `kimi-k2.7-code`, `kimi-k2.7-code-highspeed`, and `kimi-k2.6` in config.yaml
 - **`make enable-spend`** — new target to enable file-based spend tracking in config.yaml
 - **`make install` now prepares spend tracking** — creates `logs/` directory and verifies `spend_logs: true` in config.yaml
 - **Linux systemd service** (`litellm-proxy.service`) — hardened systemd unit with `NoNewPrivileges`, `ProtectSystem`, `ProtectHome`, `PrivateTmp`, restart policy, and journald logging
