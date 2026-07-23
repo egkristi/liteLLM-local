@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- **7 new cloud providers** — OpenAI (15 models), Google Gemini (5), xAI Grok (5), Cohere (3), Perplexity (4), OpenRouter (2), NVIDIA NIM (2) added to `config.yaml`
+- **New API keys** — `GEMINI_API_KEY`, `XAI_API_KEY`, `COHERE_API_KEY`, `PERPLEXITYAI_API_KEY`, `OPENROUTER_API_KEY`, `NVIDIA_NIM_API_KEY` added to `.env.example`
+- **Model aliases** — `best-reasoning` → `openai/gpt-5.2`, `best-research` → `perplexity/sonar-deep-research`; updated `best-coding` → `deepseek/deepseek-v4-flash`, `best-chat` → `anthropic/claude-sonnet-5`, `cheap` → `openai/gpt-4.1-nano`
 - **Kimi K3 series models** — replaced deprecated `kimi-latest`/`moonshot-v1-128k` with `kimi-k3` (flagship, 1M context), `kimi-k2.7-code`, `kimi-k2.7-code-highspeed`, and `kimi-k2.6` in config.yaml
 - **`make enable-spend`** — new target to enable file-based spend tracking in config.yaml
 - **`make install` now prepares spend tracking** — creates `logs/` directory and verifies `spend_logs: true` in config.yaml
@@ -19,6 +22,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - New Ollama cloud model: `glm-5.2-cloud` (GLM 5.2) — added to `config.yaml`, VS Code settings, and generator script
 - New Ollama cloud model: `minimax-m3-cloud` (MiniMax M3) — added to `config.yaml`, VS Code settings, and generator script
 - New Ollama cloud model: `kimi-k2.7-code-cloud` (Kimi K2.7 Code) — added to `config.yaml`, VS Code settings, and generator script
+
+### Changed
+- **Deprecated model updates** — Anthropic: `claude-sonnet-4-6` → `claude-sonnet-5`, `claude-opus-4-6` → `claude-opus-4-8`; Mistral: `mistral-large-latest` → `mistral-large-3`, `codestral-latest` → `codestral-3`; fallback chain updated to use `deepseek/deepseek-v4-pro` and `anthropic/claude-sonnet-5`
+- **docs/PROVIDERS.md** — completely rewritten with all 11 providers, correct model strings, pricing, and usage examples
 
 ### Fixed
 - **`cache-proxy.py` `do_GET()`** — no longer reads request body (was causing hangs with `Content-Length` headers on GET). Also fixed `global BACKEND_PORT` declaration ordering bug. (C-1, C-2)
