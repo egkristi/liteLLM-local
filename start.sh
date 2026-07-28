@@ -79,4 +79,17 @@ if [ "${LITELLM_CACHE:-}" = "true" ]; then
   sleep 1
 fi
 
+# --- Sanitize proxy mode (filters lone surrogate hex escapes) ---
+if [ "${LITELLM_SANITIZE:-}" = "true" ]; then
+  SANITIZE_PORT="${LITELLM_SANITIZE_PORT:-4002}"
+  echo "Sanitize proxy enabled (frontend: $SANITIZE_PORT, backend: $LITELLM_PORT)"
+  echo "  Sanitizes lone surrogate hex escapes from JSON bodies before forwarding"
+  # Start sanitize proxy in background
+  python3 "$SCRIPT_DIR/sanitize-proxy.py" --port "$SANITIZE_PORT" --backend "$LITELLM_PORT" &
+  SANITIZE_PID=$!
+  echo "Sanitize proxy PID: $SANITIZE_PID"
+  # Give it a moment to start
+  sleep 1
+fi
+
 exec uv tool run litellm --config "$CONFIG" --port "$LITELLM_PORT" $RELOAD_FLAG $JSON_FLAG 2>&1 | tee "logs/litellm-$(date +%Y%m%d-%H%M%S).log"

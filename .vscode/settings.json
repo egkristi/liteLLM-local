@@ -6,6 +6,346 @@
       "apiKey": "not-needed",
       "apiType": "chat-completions",
       "models": [
+        # OpenAI — flagship models
+        {
+          "id": "gpt-5-pro",
+          "name": "GPT-5 Pro",
+          "url": "http://localhost:4000/v1/chat/completions",
+          "toolCalling": true,
+          "vision": false,
+          "maxInputTokens": 131072,
+          "maxOutputTokens": 8000
+        },
+        {
+          "id": "gpt-5",
+          "name": "GPT-5",
+          "url": "http://localhost:4000/v1/chat/completions",
+          "toolCalling": true,
+          "vision": false,
+          "maxInputTokens": 131072,
+          "maxOutputTokens": 8000
+        },
+        {
+          "id": "gpt-5-mini",
+          "name": "GPT-5 Mini",
+          "url": "http://localhost:4000/v1/chat/completions",
+          "toolCalling": true,
+          "vision": false,
+          "maxInputTokens": 131072,
+          "maxOutputTokens": 8000
+        },
+        {
+          "id": "gpt-5-nano",
+          "name": "GPT-5 Nano",
+          "url": "http://localhost:4000/v1/chat/completions",
+          "toolCalling": true,
+          "vision": false,
+          "maxInputTokens": 131072,
+          "maxOutputTokens": 8000
+        },
+        {
+          "id": "gpt-5.1",
+          "name": "GPT-5.1",
+          "url": "http://localhost:4000/v1/chat/completions",
+          "toolCalling": true,
+          "vision": false,
+          "maxInputTokens": 131072,
+          "maxOutputTokens": 8000
+        },
+        {
+          "id": "gpt-5.2",
+          "name": "GPT-5.2",
+          "url": "http://localhost:4000/v1/chat/completions",
+          "toolCalling": true,
+          "vision": false,
+          "maxInputTokens": 131072,
+          "maxOutputTokens": 8000
+        },
+        {
+          "id": "gpt-5.4",
+          "name": "GPT-5.4",
+          "url": "http://localhost:4000/v1/chat/completions",
+          "toolCalling": true,
+          "vision": false,
+          "maxInputTokens": 131072,
+          "maxOutputTokens": 8000
+        },
+        {
+          "id": "gpt-5.5",
+          "name": "GPT-5.5",
+          "url": "http://localhost:4000/v1/chat/completions",
+          "toolCalling": true,
+          "vision": false,
+          "maxInputTokens": 131072,
+          "maxOutputTokens": 8000
+        },
+        {
+          "id": "o4-mini",
+          "name": "o4-mini",
+          "url": "http://localhost:4000/v1/chat/completions",
+          "toolCalling": true,
+          "vision": false,
+          "maxInputTokens": 131072,
+          "maxOutputTokens": 8000
+        },
+        {
+          "id": "o3-mini",
+          "name": "o3-mini",
+          "url": "http://localhost:4000/v1/chat/completions",
+          "toolCalling": true,
+          "vision": false,
+          "maxInputTokens": 131072,
+          "maxOutputTokens": 8000
+        },
+        {
+          "id": "o3",
+          "name": "o3",
+          "url": "http://localhost:4000/v1/chat/completions",
+          "toolCalling": true,
+          "vision": false,
+          "maxInputTokens": 131072,
+          "maxOutputTokens": 8000
+        },
+        {
+          "id": "gpt-4.1",
+          "name": "GPT-4.1",
+          "url": "http://localhost:4000/v1/chat/completions",
+          "toolCalling": true,
+          "vision": true,
+          "maxInputTokens": 131072,
+          "maxOutputTokens": 8000
+        },
+        {
+          "id": "gpt-4.1-mini",
+          "name": "GPT-4.1 Mini",
+          "url": "http://localhost:4000/v1/chat/completions",
+          "toolCalling": true,
+          "vision": true,
+          "maxInputTokens": 131072,
+          "maxOutputTokens": 8000
+        },
+        {
+          "id": "gpt-4.1-nano",
+          "name": "GPT-4.1 Nano",
+          "url": "http://localhost:4000/v1/chat/completions",
+          "toolCalling": true,
+          "vision": true,
+          "maxInputTokens": 131072,
+          "maxOutputTokens": 8000
+        },
+        {
+          "id": "gpt-4o-mini",
+          "name": "GPT-4o Mini",
+          "url": "http://localhost:4000/v1/chat/completions",
+          "toolCalling": true,
+          "vision": true,
+          "maxInputTokens": 131072,
+          "maxOutputTokens": 8000
+        },
+        {
+          "id": "gpt-4o",
+          "name": "GPT-4o",
+          "url": "http://localhost:4000/v1/chat/completions",
+          "toolCalling": true,
+          "vision": true,
+          "maxInputTokens": 131072,
+          "maxOutputTokens": 8000
+        },
+        # Google Gemini — reasoning, vision, flash models
+        {
+          "id": "gemini-3.1-flash-lite",
+          "name": "Gemini 3.1 Flash Lite",
+          "url": "http://localhost:4000/v1/chat/completions",
+          "toolCalling": true,
+          "vision": true,
+          "maxInputTokens": 1048576,
+          "maxOutputTokens": 8000
+        },
+        {
+          "id": "gemini-2.5-flash",
+          "name": "Gemini 2.5 Flash",
+          "url": "http://localhost:4000/v1/chat/completions",
+          "toolCalling": true,
+          "vision": true,
+          "maxInputTokens": 1048576,
+          "maxOutputTokens": 8000
+        },
+        {
+          "id": "gemini-2.5-flash-lite",
+          "name": "Gemini 2.5 Flash Lite",
+          "url": "http://localhost:4000/v1/chat/completions",
+          "toolCalling": true,
+          "vision": true,
+          "maxInputTokens": 1048576,
+          "maxOutputTokens": 8000
+        },
+        {
+          "id": "gemini-2.0-flash",
+          "name": "Gemini 2.0 Flash",
+          "url": "http://localhost:4000/v1/chat/completions",
+          "toolCalling": true,
+          "vision": true,
+          "maxInputTokens": 1048576,
+          "maxOutputTokens": 8000
+        },
+        {
+          "id": "gemini-1.5-pro",
+          "name": "Gemini 1.5 Pro",
+          "url": "http://localhost:4000/v1/chat/completions",
+          "toolCalling": true,
+          "vision": true,
+          "maxInputTokens": 2097152,
+          "maxOutputTokens": 8000
+        },
+        # xAI Grok — reasoning, vision, code
+        {
+          "id": "grok-4.1-fast-reasoning",
+          "name": "Grok 4.1 Fast Reasoning",
+          "url": "http://localhost:4000/v1/chat/completions",
+          "toolCalling": true,
+          "vision": false,
+          "maxInputTokens": 131072,
+          "maxOutputTokens": 8000
+        },
+        {
+          "id": "grok-4.1-fast-non-reasoning",
+          "name": "Grok 4.1 Fast",
+          "url": "http://localhost:4000/v1/chat/completions",
+          "toolCalling": true,
+          "vision": false,
+          "maxInputTokens": 131072,
+          "maxOutputTokens": 8000
+        },
+        {
+          "id": "grok-4",
+          "name": "Grok 4",
+          "url": "http://localhost:4000/v1/chat/completions",
+          "toolCalling": true,
+          "vision": false,
+          "maxInputTokens": 131072,
+          "maxOutputTokens": 8000
+        },
+        {
+          "id": "grok-3",
+          "name": "Grok 3",
+          "url": "http://localhost:4000/v1/chat/completions",
+          "toolCalling": true,
+          "vision": false,
+          "maxInputTokens": 131072,
+          "maxOutputTokens": 8000
+        },
+        {
+          "id": "grok-code",
+          "name": "Grok Code",
+          "url": "http://localhost:4000/v1/chat/completions",
+          "toolCalling": true,
+          "vision": false,
+          "maxInputTokens": 131072,
+          "maxOutputTokens": 8000
+        },
+        # Cohere — enterprise command models
+        {
+          "id": "command-a",
+          "name": "Command A",
+          "url": "http://localhost:4000/v1/chat/completions",
+          "toolCalling": true,
+          "vision": false,
+          "maxInputTokens": 131072,
+          "maxOutputTokens": 8000
+        },
+        {
+          "id": "command-r-plus",
+          "name": "Command R+",
+          "url": "http://localhost:4000/v1/chat/completions",
+          "toolCalling": true,
+          "vision": false,
+          "maxInputTokens": 131072,
+          "maxOutputTokens": 8000
+        },
+        {
+          "id": "command-r",
+          "name": "Command R",
+          "url": "http://localhost:4000/v1/chat/completions",
+          "toolCalling": true,
+          "vision": false,
+          "maxInputTokens": 131072,
+          "maxOutputTokens": 8000
+        },
+        # Perplexity — search-grounded models
+        {
+          "id": "sonar-deep-research",
+          "name": "Sonar Deep Research",
+          "url": "http://localhost:4000/v1/chat/completions",
+          "toolCalling": false,
+          "vision": false,
+          "maxInputTokens": 131072,
+          "maxOutputTokens": 8000
+        },
+        {
+          "id": "sonar-reasoning-pro",
+          "name": "Sonar Reasoning Pro",
+          "url": "http://localhost:4000/v1/chat/completions",
+          "toolCalling": true,
+          "vision": false,
+          "maxInputTokens": 131072,
+          "maxOutputTokens": 8000
+        },
+        {
+          "id": "sonar-pro",
+          "name": "Sonar Pro",
+          "url": "http://localhost:4000/v1/chat/completions",
+          "toolCalling": true,
+          "vision": false,
+          "maxInputTokens": 131072,
+          "maxOutputTokens": 8000
+        },
+        {
+          "id": "sonar",
+          "name": "Sonar",
+          "url": "http://localhost:4000/v1/chat/completions",
+          "toolCalling": true,
+          "vision": false,
+          "maxInputTokens": 131072,
+          "maxOutputTokens": 8000
+        },
+        # OpenRouter — unified access to 300+ models
+        {
+          "id": "openrouter-best",
+          "name": "OpenRouter Best (GPT-5.2)",
+          "url": "http://localhost:4000/v1/chat/completions",
+          "toolCalling": true,
+          "vision": false,
+          "maxInputTokens": 131072,
+          "maxOutputTokens": 8000
+        },
+        {
+          "id": "openrouter-cheap",
+          "name": "OpenRouter Cheap (GPT-4.1 Nano)",
+          "url": "http://localhost:4000/v1/chat/completions",
+          "toolCalling": true,
+          "vision": false,
+          "maxInputTokens": 131072,
+          "maxOutputTokens": 8000
+        },
+        # NVIDIA NIM — hosted open-source models
+        {
+          "id": "nvidia-llama",
+          "name": "NVIDIA Llama 3 70B",
+          "url": "http://localhost:4000/v1/chat/completions",
+          "toolCalling": true,
+          "vision": false,
+          "maxInputTokens": 32768,
+          "maxOutputTokens": 8000
+        },
+        {
+          "id": "nvidia-nemotron",
+          "name": "NVIDIA Nemotron 340B",
+          "url": "http://localhost:4000/v1/chat/completions",
+          "toolCalling": true,
+          "vision": false,
+          "maxInputTokens": 32768,
+          "maxOutputTokens": 8000
+        },
         {
           "id": "deepseek-v4-pro",
           "name": "DeepSeek V4 Pro",
@@ -35,7 +375,7 @@
         },
         {
           "id": "claude-sonnet",
-          "name": "Claude Sonnet 4.6",
+          "name": "Claude Sonnet 5",
           "url": "http://localhost:4000/v1/chat/completions",
           "toolCalling": true,
           "vision": true,
@@ -79,7 +419,43 @@
           "maxOutputTokens": 8000
         },
         {
+          "id": "kimi-k3",
+          "name": "Kimi K3",
+          "url": "http://localhost:4000/v1/chat/completions",
+          "toolCalling": true,
+          "vision": false,
+          "maxInputTokens": 131072,
+          "maxOutputTokens": 8000
+        },
+        {
           "id": "kimi-latest",
+          "name": "Kimi Latest (K3)",
+          "url": "http://localhost:4000/v1/chat/completions",
+          "toolCalling": true,
+          "vision": false,
+          "maxInputTokens": 131072,
+          "maxOutputTokens": 8000
+        },
+        {
+          "id": "kimi-k2.7-code",
+          "name": "Kimi K2.7 Code",
+          "url": "http://localhost:4000/v1/chat/completions",
+          "toolCalling": true,
+          "vision": false,
+          "maxInputTokens": 131072,
+          "maxOutputTokens": 8000
+        },
+        {
+          "id": "kimi-k2.7-code-highspeed",
+          "name": "Kimi K2.7 Code Highspeed",
+          "url": "http://localhost:4000/v1/chat/completions",
+          "toolCalling": true,
+          "vision": false,
+          "maxInputTokens": 131072,
+          "maxOutputTokens": 8000
+        },
+        {
+          "id": "kimi-k2.6",
           "name": "Kimi K2.6",
           "url": "http://localhost:4000/v1/chat/completions",
           "toolCalling": true,
@@ -287,7 +663,7 @@
         },
         {
           "id": "best-coding",
-          "name": "\u2b50 Best Coding \u2192 DeepSeek V4 Pro",
+          "name": "\u2b50 Best Coding \u2192 DeepSeek V4 Flash",
           "url": "http://localhost:4000/v1/chat/completions",
           "toolCalling": true,
           "vision": false,
@@ -296,11 +672,29 @@
         },
         {
           "id": "best-chat",
-          "name": "\u2b50 Best Chat \u2192 Claude Sonnet 4.6",
+          "name": "\u2b50 Best Chat \u2192 Claude Sonnet 5",
           "url": "http://localhost:4000/v1/chat/completions",
           "toolCalling": true,
           "vision": true,
           "maxInputTokens": 200000,
+          "maxOutputTokens": 8000
+        },
+        {
+          "id": "best-reasoning",
+          "name": "\u2b50 Best Reasoning \u2192 GPT-5.2",
+          "url": "http://localhost:4000/v1/chat/completions",
+          "toolCalling": true,
+          "vision": false,
+          "maxInputTokens": 131072,
+          "maxOutputTokens": 8000
+        },
+        {
+          "id": "best-research",
+          "name": "\u2b50 Best Research \u2192 Sonar Deep Research",
+          "url": "http://localhost:4000/v1/chat/completions",
+          "toolCalling": false,
+          "vision": false,
+          "maxInputTokens": 131072,
           "maxOutputTokens": 8000
         },
         {
@@ -314,11 +708,11 @@
         },
         {
           "id": "cheap",
-          "name": "\u2b50 Cheap \u2192 DeepSeek V4 Flash (cloud)",
+          "name": "\u2b50 Cheap \u2192 GPT-4.1 Nano",
           "url": "http://localhost:4000/v1/chat/completions",
           "toolCalling": true,
-          "vision": false,
-          "maxInputTokens": 32768,
+          "vision": true,
+          "maxInputTokens": 131072,
           "maxOutputTokens": 8000
         },
         {

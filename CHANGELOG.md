@@ -27,7 +27,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Deprecated model updates** — Anthropic: `claude-sonnet-4-6` → `claude-sonnet-5`, `claude-opus-4-6` → `claude-opus-4-8`; Mistral: `mistral-large-latest` → `mistral-large-3`, `codestral-latest` → `codestral-3`; fallback chain updated to use `deepseek/deepseek-v4-pro` and `anthropic/claude-sonnet-5`
 - **docs/PROVIDERS.md** — completely rewritten with all 11 providers, correct model strings, pricing, and usage examples
 
+### Added
+- **`sanitize-proxy.py`** — new proxy middleware that sanitizes lone leading surrogate hex escapes from JSON bodies before forwarding to LiteLLM. Fixes DeepSeek 400 error when VS Code Copilot sends messages containing unpaired surrogates (e.g., certain emoji/special chars from ISF text buffer). Enable with `LITELLM_SANITIZE=true` (runs on port 4002 by default). Includes 10 self-tests.
+- **`start.sh`** — new `LITELLM_SANITIZE=true` mode (port 4002, configurable via `LITELLM_SANITIZE_PORT`)
+- **`stop.sh`** — now also stops sanitize proxy (port 4002) and cache proxy (port 4001)
+- **`ISSUES.md`** — added Log Audit Findings section with results from all 26 log files
+
 ### Fixed
+- **`best-coding` alias** — fixed model_name from `deepseek/deepseek-v4-flash` to `deepseek/deepseek-v4-pro` with correct cost params
 - **`cache-proxy.py` `do_GET()`** — no longer reads request body (was causing hangs with `Content-Length` headers on GET). Also fixed `global BACKEND_PORT` declaration ordering bug. (C-1, C-2)
 - **`stop.sh`** — added missing `set -e` so `kill` failures are not silently ignored. (H-3)
 - **`validate.sh`** — changed `/models` endpoint to `/v1/models` for LiteLLM API compatibility. (H-4)

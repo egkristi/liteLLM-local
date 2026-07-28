@@ -516,7 +516,17 @@ model_list:
       output_cost_per_token: 0.000003
 
   # Moonshot / Kimi — https://platform.kimi.ai/docs/models
-  # Note: kimi-latest and moonshot-v1 series are deprecated (sunset Aug 31, 2026)
+  # Note: moonshot-v1 series is deprecated (sunset Aug 31, 2026)
+  - model_name: kimi-latest
+    litellm_params:
+      model: moonshot/kimi-latest
+      api_key: os.environ/KIMI_API_KEY
+    model_info:
+      mode: chat
+      max_tokens: 1048576
+      input_cost_per_token: 0.00000300
+      output_cost_per_token: 0.00001500
+
   - model_name: kimi-k3
     litellm_params:
       model: moonshot/kimi-k3
@@ -795,13 +805,13 @@ model_list:
   # Usage: set model="best-coding" in your client
   - model_name: best-coding
     litellm_params:
-      model: deepseek/deepseek-v4-flash
+      model: deepseek/deepseek-v4-pro
       api_key: os.environ/DEEPSEEK_API_KEY
     model_info:
       mode: chat
       max_tokens: 65536
-      input_cost_per_token: 0.00000007
-      output_cost_per_token: 0.00000014
+      input_cost_per_token: 0.00000014
+      output_cost_per_token: 0.00000028
 
   - model_name: best-chat
     litellm_params:
